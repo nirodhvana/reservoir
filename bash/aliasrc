@@ -17,6 +17,7 @@ alias \
 	trm="transmission-remote" \
     session="./session" \
     ani-cli="cd /usr/local/bin/ && ./ani-cli" \
+    mpp="mpv -playlist='.'" \
     mdf="mednafen" \
     n64="mupen64plus" \
 

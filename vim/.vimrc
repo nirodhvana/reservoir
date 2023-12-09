@@ -1,4 +1,4 @@
-let mapleader =","
+let mapleader =" "
 filetype on
 
 set bg=light
@@ -16,6 +16,9 @@ set fileformat=unix
 " Plugins
 call plug#begin('~/.vim/plugged')
     Plug 'mattn/emmet-vim'
+    Plug 'vimwiki/vimwiki'
+    Plug 'LukeSmithxyz/vimling'
+    Plug 'junegunn/goyo.vim'
 call plug#end()
 
 " Some basics:

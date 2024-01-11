@@ -4,14 +4,18 @@ filetype on
 set bg=light
 set go=a
 set mouse=a
-set nohlsearch
+set hls is
 set clipboard=unnamedplus
+set background=dark
 set tabstop=4 "Sets tab size to 4 spaces
 set softtabstop=4
 set shiftwidth=4
 set expandtab "Converts our tabs to spaces
+set autowrite
 set autoindent
 set fileformat=unix
+set showcmd
+
 
 " Plugins
 call plug#begin('~/.vim/plugged')
@@ -24,7 +28,7 @@ call plug#end()
 " Some basics:
 	nnoremap c "_c
 	set nocompatible
-	filetype plugin on
+	filetype plugin indent on
 	syntax on
 	set encoding=utf-8
 	set number relativenumber
@@ -47,13 +51,13 @@ call plug#end()
 " Copy selected text to system clipboard (requires gvim/nvim/vim-x11 installed):
 	vnoremap <C-c> "+y
 	map <C-p> "+P
-"Newtab with ctrl+t
+" Newtab with ctrl+t
 	nnoremap <silent> <C-t> :tabnew<CR>
-"Paste from system clipboard with ctrl+i instead of shift insert
+" Paste from system clipboard with ctrl+i instead of shift insert
 	map <S-Insert> <C-i>
-"Automatically deletes all trailing whitespace on save.
+" Automatically deletes all trailing whitespace on save.
     autocmd BufWritePre * %s/\s\+$//e
-"Run xrdb whenever Xdefaults or Xresources are updated.
+" Run xrdb whenever Xdefaults or Xresources are updated.
     autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 " Colorscheme
     :colorscheme delek

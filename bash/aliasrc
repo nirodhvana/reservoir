@@ -20,6 +20,7 @@ alias \
     mpp="mpv -playlist='.'" \
     mdf="mednafen" \
     n64="mupen64plus" \
+    mpv="mpv --no-sub-ass" \
 
 # adding color to commands.
 alias \

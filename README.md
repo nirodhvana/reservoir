@@ -1,2 +1,2 @@
 # dotfiles
-My Configs
+My Configs(Now managed using GNU Stow)

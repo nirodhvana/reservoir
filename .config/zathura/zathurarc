@@ -1,7 +1,7 @@
 set sandbox none
 set statusbar-h-padding 0
 set statusbar-v-padding 0
-set page-padding 1
+set page-padding 5
 set selection-clipboard clipboard
 set font 'garamond regular 8.5'
 set completion-group-bg '1d1f21'

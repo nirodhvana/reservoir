@@ -25,6 +25,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'vimwiki/vimwiki'
     Plug 'LukeSmithxyz/vimling'
     Plug 'junegunn/goyo.vim'
+    Plug 'jreybert/vimagit'
+    Plug 'jceb/vim-orgmode'
 call plug#end()
 
 " Some basics:
@@ -65,7 +67,7 @@ call plug#end()
 " Open corresponding .pdf/.html or preview
 	map <leader>p :!opout <c-r>%<CR><CR>
 " Navigating with guides
-	inoremap <leader><leader> <Esc>/<++><Enter>"_c4l
+	inoremap <leader><leader> <Esc>/<Enter>"_c4l
 	vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
 	map <leader><leader> <Esc>/<++><Enter>"_c4l
 " Automatically deletes all trailing whitespace on save.

@@ -1,2 +1,1 @@
-# ignore stow ignore file
-.stow-local-ignore
+.config/mpv/watch_later

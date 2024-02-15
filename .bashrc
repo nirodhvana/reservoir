@@ -1,5 +1,6 @@
 #!/bin/bash
 stty -ixon # Disable ctrl-s and ctrl-q
+stty werase '^H' #Delete entire word with Ctrl+BackSp
 shopt -s autocd # Allows you to cd into directory merely by typing the directory name.
 shopt -s histappend # append to the history file, don't overwrite it
 set -o vi # Enables vi mode in terminal
@@ -28,4 +29,4 @@ cat ~/.cache/wal/sequences
 # To add support for TTYs this line can be optionally added.
 source ~/.cache/wal/colors-tty.sh
 
-export DISPLAY=:0
+export DISPLAY=:0.0

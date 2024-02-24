@@ -11,6 +11,7 @@ set ts=5 "Number of spaces that a <Tab> counts for
 set sts=4 "Number of spaces that a <Tab> counts for while performing editing operations
 set shiftwidth=4
 set expandtab "Converts our tabs to spaces
+set lazyredraw "the screen will not be redrawn while executing macros, registers and other commands
 set aw "Write the contents of the file, if it has been modified
 set ai "Copy indent from current line when starting a new line
 set ar "Automatically read a file that has been changed outside of Vim
@@ -21,12 +22,16 @@ set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L]
 
 " Plugins
 call plug#begin('~/.vim/plugged')
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-commentary'
+    Plug 'preservim/nerdtree'
     Plug 'mattn/emmet-vim'
     Plug 'vimwiki/vimwiki'
     Plug 'LukeSmithxyz/vimling'
     Plug 'junegunn/goyo.vim'
     Plug 'jreybert/vimagit'
     Plug 'jceb/vim-orgmode'
+    Plug 'ap/vim-css-color'
 call plug#end()
 
 " Some basics:
@@ -47,8 +52,10 @@ call plug#end()
 	map <C-k> <C-w>k
 	map <C-l> <C-w>l
 " Emmet Shortcuts
-    let g:user_emmet_mode='n'   "Only enable normal mode functions.
-    let g:user_emmet_leader_key=','
+     let g:user_emmet_mode='n'   "Only enable normal mode functions.
+     let g:user_emmet_leader_key=','
+" Check file in shellcheck:
+     map <leader>s :!clear && shellcheck -x %<CR>
 " Goyo Shortcuts
      map <leader>f :Goyo<CR>
 " Spell-check set to F6 and the British English library.
@@ -68,8 +75,8 @@ call plug#end()
 	map <leader>p :!opout <c-r>%<CR><CR>
 " Navigating with guides
 	inoremap <leader><leader> <Esc>/<Enter>"_c4l
-	vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
-	map <leader><leader> <Esc>/<++><Enter>"_c4l
+	vnoremap <leader><leader> <Esc>/<Enter>"_c4l
+	map <leader><leader> <Esc>/<Enter>"_c4l
 " Automatically deletes all trailing whitespace on save.
     autocmd BufWritePre * %s/\s\+$//e
 " Run xrdb whenever Xdefaults or Xresources are updated.

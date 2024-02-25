@@ -62,9 +62,11 @@ call plug#end()
      map <F6> :setlocal spell! spelllang=en_gb<CR>
 " Replace all is aliased to S.
 	nnoremap S :%s//g<Left><Left>
-" Copy selected text to system clipboard (requires gvim/nvim/vim-x11 installed):
-	vnoremap <C-c> "+y
-	map <C-p> "+P
+" Copy selected text to system clipboard (requires gvim/nvim/vim-x11/vim-gtk3 installed):
+	nnoremap <C-y> "+y
+	vnoremap<C-y> "+y
+     nnoremap <C-p> "+gP
+     vnoremap <C-p> "+gP
 " Newtab with ctrl+t
 	nnoremap <silent> <C-t> :tabnew<CR>
 " Paste from system clipboard with ctrl+i instead of shift insert

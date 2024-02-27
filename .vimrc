@@ -22,10 +22,6 @@ set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L]
 
 " Plugins
 call plug#begin('~/.vim/plugged')
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-commentary'
-    Plug 'preservim/nerdtree'
-    Plug 'mattn/emmet-vim'
     Plug 'vimwiki/vimwiki'
     Plug 'LukeSmithxyz/vimling'
     Plug 'junegunn/goyo.vim'

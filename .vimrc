@@ -51,9 +51,6 @@ call plug#end()
 	map <C-j> <C-w>j
 	map <C-k> <C-w>k
 	map <C-l> <C-w>l
-" Emmet Shortcuts
-     let g:user_emmet_mode='n'   "Only enable normal mode functions.
-     let g:user_emmet_leader_key=','
 " Check file in shellcheck:
      map <leader>s :!clear && shellcheck -x %<CR>
 " Goyo Shortcuts
@@ -62,7 +59,7 @@ call plug#end()
      map <F6> :setlocal spell! spelllang=en_gb<CR>
 " Replace all is aliased to S.
 	nnoremap S :%s//g<Left><Left>
-" Copy selected text to system clipboard (requires gvim/nvim/vim-x11/vim-gtk3 installed):
+" Copy selected text to system clipboard (requires gvim/vim-gtk3 installed):
 	nnoremap <C-y> "+y
 	vnoremap<C-y> "+y
      nnoremap <C-p> "+gP
@@ -71,7 +68,7 @@ call plug#end()
 	nnoremap <silent> <C-t> :tabnew<CR>
 " Paste from system clipboard with ctrl+i instead of shift insert
 	map <S-Insert> <C-i>
-" Compile document, be it groff/LaTeX/markdown/etc.
+" Compile document, be it groff/LaTeX/etc.
 	map <leader>c :w! \| !compiler <c-r>%<CR>
 " Open corresponding .pdf/.html or preview
 	map <leader>p :!opout <c-r>%<CR><CR>

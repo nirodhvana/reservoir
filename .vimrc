@@ -62,8 +62,6 @@ call plug#end()
      vnoremap <C-p> "+gP
 " Newtab with ctrl+t
 	nnoremap <silent> <C-t> :tabnew<CR>
-" Paste from system clipboard with ctrl+i instead of shift insert
-	map <S-Insert> <C-i>
 " Compile document, be it groff/LaTeX/etc.
 	map <leader>c :w! \| !compiler <c-r>%<CR>
 " Open corresponding .pdf/.html or preview

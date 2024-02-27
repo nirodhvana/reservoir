@@ -6,7 +6,7 @@ set go=a
 set mouse=a "Enabling mouse in all modes
 set mousehide "Automatically hide mouse in vim
 set hls is "When there is a previous search pattern, highlight all its matches.
-set clipboard=unnamedplus
+set clipboard=unnamedplus "Syncing your primary vim register with the system clipboard
 set ts=5 "Number of spaces that a <Tab> counts for
 set sts=4 "Number of spaces that a <Tab> counts for while performing editing operations
 set shiftwidth=4

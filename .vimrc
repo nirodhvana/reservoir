@@ -22,7 +22,6 @@ set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L]
 
 " Plugins
 call plug#begin('~/.vim/plugged')
-    Plug 'vimwiki/vimwiki'
     Plug 'LukeSmithxyz/vimling'
     Plug 'junegunn/goyo.vim'
     Plug 'jreybert/vimagit'

@@ -11,12 +11,12 @@ alias \
     mk="make" \
 	g="git" \
 	mkd="mkdir -pv" \
-    shdn="sudo shutdown -h now" \
+    shd="sudo shutdown -h now" \
 	yt="yt-dlp --add-metadata -i" \
 	yta="yt -x -f bestaudio/best" \
 	trm="transmission-remote" \
     session="./session" \
-    ani-cli="cd /usr/local/bin/ && ./ani-cli" \
+    ani-cli="./usr/local/bin/ani-cli" \
     mpp="mpv -playlist='.'" \
     mdf="mednafen" \
     n64="mupen64plus" \

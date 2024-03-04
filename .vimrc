@@ -23,6 +23,7 @@ set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L]
 " Plugins
 call plug#begin('~/.vim/plugged')
     Plug 'LukeSmithxyz/vimling'
+    Plug 'mattn/emmet-vim'
     Plug 'junegunn/goyo.vim'
     Plug 'jreybert/vimagit'
     Plug 'jceb/vim-orgmode'

@@ -26,7 +26,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'mattn/emmet-vim'
     Plug 'junegunn/goyo.vim'
     Plug 'jreybert/vimagit'
-    Plug 'jceb/vim-orgmode'
     Plug 'ap/vim-css-color'
 call plug#end()
 

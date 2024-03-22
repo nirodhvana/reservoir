@@ -2,31 +2,49 @@
 
 # Shortening common commands and making some more verbose.
 alias \
-	e="$EDITOR" \
-	v="$EDITOR" \
+    v="$EDITOR" \
     sudo="doas" \
-	cp="cp -iv" \
-	mv="mv -iv" \
-	rm="rm -v" \
+    cp="cp -iv" \
+    mv="mv -iv" \
+    rm="rm -v" \
     mk="make" \
-	g="git" \
-	mkd="mkdir -pv" \
+    g="git" \
+    mkd="mkdir -pv" \
     shd="sudo shutdown -h now" \
-	yt="yt-dlp --add-metadata -i" \
-	yta="yt -x -f bestaudio/best" \
-	trm="transmission-remote" \
-    session="./session" \
-    ani-cli="./usr/local/bin/ani-cli" \
-    mpp="mpv -playlist='.'" \
+
+# Programs
+alias \
+    trm="transmission-remote" \
+    emacs="emacsclient -nw -ca $EDITOR" \
     mdf="mednafen" \
     n64="mupen64plus" \
     mpv="mpv --no-sub-ass" \
 
-# adding color to commands.
+# Utilities
 alias \
-	ls="ls -hN --color=auto --group-directories-first" \
+    scrk="screenkey --no-whitespace -s small --bak-mode full -t 1 &" \
+    showme="mpv --no-osc --autofit=30% --no-input-default-bindings --input-conf=/dev/null /dev/video0" \
+    mpp="mpv -playlist=".'' \
+    enc="gpg -c --no-symkey-cache --cipher-algo AES256" \
+
+# Youtube-dl
+alias \
+    yt="yt-dlp --add-metadata -i" \
+    yta="yt -x -f bestaudio/best" \
+    ytt="yt --write-thumbnail" \
+
+# Window swallowing.
+alias \
+    mpv="swallow mpv" \
+    ffplay="swallow ffplay" \
+    zathura="swallow zathura" \
+    nsxiv="swallow nsxiv" \
+
+# Adding color to commands.
+alias \
+    ls="ls -hN --color=auto --group-directories-first" \
     dir="dir --color=auto" \
     vdir="vdir --color=auto" \
-	grep="grep --color=auto" \
-	diff="diff --color=auto" \
-	ccat="highlight --out-format=ansi" \
+    grep="grep --color=auto" \
+    diff="diff --color=auto" \
+    ccat="highlight --out-format=ansi" \

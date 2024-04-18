@@ -1,7 +1,7 @@
 # file types (with matching order)
 ln             # LINK
 or             # ORPHAN
-ow             # OTHER_WRITABLE
+ow             # OTHER_WRITABLE
 di             # DIR
 ex             # EXEC
 fi             # FILE
@@ -44,7 +44,7 @@ fi             # FILE
 *.go            
 *.rss           
 *.ex            
-*.vim           
+*.vim           
 *.tex           󰙩
 *.r             󰟔
 *.log           
@@ -61,7 +61,7 @@ fi             # FILE
 *.gitconfig             
 *.gitignore             
 *.bashrc                
-*.vimrc                 
+*.vimrc                 
 *.bashprofile           
 *license                
 *makefile               
@@ -74,7 +74,7 @@ fi             # FILE
 
 # file patterns (file name adaptations)
 *materialize.min.css    
-*vimrc                  
+*vimrc                  
 
 # archives or compressed (extensions from dircolors defaults)
 *.tar   
@@ -105,11 +105,11 @@ fi             # FILE
 
 # audio formats (extensions from dircolors defaults)
 *.aac   
-*.flac  
+*.flac  󰽴
 *.m4a   
 *.mp3   
 *.ogg   
-*.wav   
+*.wav   󰽴
 *.opus  
 
 # other formats

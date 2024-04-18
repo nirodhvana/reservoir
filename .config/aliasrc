@@ -23,7 +23,7 @@ alias \
 # Utilities
 alias \
     scrk="screenkey --no-whitespace -s small --bak-mode full -t 1 &" \
-    showme="mpv --no-osc --autofit=30% --no-input-default-bindings --input-conf=/dev/null /dev/video0" \
+    showme="mpv --no-osc --autofit=30% /dev/video0" \
     mpp="mpv -playlist=".'' \
     enc="gpg -c --no-symkey-cache --cipher-algo AES256" \
 

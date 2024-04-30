@@ -22,7 +22,10 @@ set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L]
 
 " Plugins
 call plug#begin('~/.vim/plugged')
+    Plug 'dense-analysis/ale'
+    Plug 'vimwiki/vimwiki'
     Plug 'LukeSmithxyz/vimling'
+    Plug 'farconics/victionary'
     Plug 'mattn/emmet-vim'
     Plug 'junegunn/goyo.vim'
     Plug 'jreybert/vimagit'
@@ -47,7 +50,7 @@ call plug#end()
 	map <C-k> <C-w>k
 	map <C-l> <C-w>l
 " Check file in shellcheck:
-     map <leader>s :!clear && shellcheck -x %<CR>
+     map <leader>sc :!clear && shellcheck -x %<CR>
 " Goyo Shortcuts
      map <leader>f :Goyo<CR>
 " Spell-check set to F6 and the British English library.

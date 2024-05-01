@@ -6,6 +6,7 @@ redshift-gtk -t 5500:5500 &
 start-pulseaudio-x11 &
 xwallpaper --focus Pictures/synced/radha_large2.jpg &
 wal -R &
+remaps &
 dunst &
 
 exec dwm

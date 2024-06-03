@@ -16,5 +16,4 @@ export LS_COLORS
 
 #PyWal
 (cat ~/.cache/wal/sequences &) # Use Pywal Colorscheme for all new terminals.
-cat ~/.cache/wal/sequences # Alternative (blocks terminal for 0-3ms)
 source ~/.cache/wal/colors-tty.sh # To add support for TTYs this line can be optionally added.

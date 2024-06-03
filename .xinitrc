@@ -4,10 +4,19 @@
 /usr/libexec/geoclue-2.0/demos/agent &
 redshift-gtk &
 start-pulseaudio-x11 &
-xwallpaper --focus Pictures/synced/radha_large2.jpg &
 wal -R &
 remaps &
 dunst &
 
-slstatus &
-exec dwm
+dwmblocks &
+echo "no" > $HOME/.cache/wmExit
+while true
+do
+	wmExit=$(cat $HOME/.cache/wmExit)
+	if [ $wmExit = "yes" ]
+	then
+		exit
+	else
+		dwm ;
+	fi
+done

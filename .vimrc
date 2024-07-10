@@ -23,7 +23,6 @@ set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L]
 " Plugins
 call plug#begin('~/.vim/plugged')
     Plug 'dense-analysis/ale'
-    Plug 'vimwiki/vimwiki'
     Plug 'LukeSmithxyz/vimling'
     Plug 'farconics/victionary'
     Plug 'mattn/emmet-vim'
@@ -51,15 +50,21 @@ call plug#end()
 	map <C-l> <C-w>l
 " Check file in shellcheck:
      map <leader>sc :!clear && shellcheck -x %<CR>
-" Goyo Shortcuts
+" Goyo mappings
      map <leader>f :Goyo<CR>
+" Victionary mappings
+     let g:victionary#map_defaults = 0
+     nmap <leader>mp <Plug>(victionary#define_prompt)
+     nmap <leader>mc <Plug>(victionary#define_under_cursor)
+     nmap <leader>ms <Plug>(victionary#synonym_prompt)
+     nmap <leader>sc <Plug>(victionary#synonym_under_cursor)
 " Spell-check set to F6 and the British English library.
      map <F6> :setlocal spell! spelllang=en_gb<CR>
 " Replace all is aliased to S.
 	nnoremap S :%s//g<Left><Left>
 " Copy selected text to system clipboard (requires gvim/vim-gtk3 installed):
 	nnoremap <C-y> "+y
-	vnoremap<C-y> "+y
+	vnoremap <C-y> "+y
      nnoremap <C-p> "+gP
      vnoremap <C-p> "+gP
 " Newtab with ctrl+t
@@ -74,7 +79,5 @@ call plug#end()
 	map <leader><leader> <Esc>/<Enter>"_c4l
 " Automatically deletes all trailing whitespace on save.
     autocmd BufWritePre * %s/\s\+$//e
-" Run xrdb whenever Xdefaults or Xresources are updated.
-    autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 " Colorscheme
     :colorscheme delek

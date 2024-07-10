@@ -2,8 +2,8 @@
 
 /usr/bin/syncthing serve --no-browser --logfile=default &
 /usr/libexec/geoclue-2.0/demos/agent &
-redshift-gtk &
 start-pulseaudio-x11 &
+redshift -O 5500 &
 wal -R &
 remaps &
 dunst &

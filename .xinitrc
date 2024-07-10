@@ -3,7 +3,7 @@
 /usr/bin/syncthing serve --no-browser --logfile=default &
 /usr/libexec/geoclue-2.0/demos/agent &
 start-pulseaudio-x11 &
-redshift -O 5500 &
+redshift -O 4500 &
 wal -R &
 remaps &
 dunst &

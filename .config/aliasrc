@@ -1,6 +1,4 @@
 #!/bin/sh
-
-# Shortening common commands and making some more verbose.
 alias \
     v="$EDITOR" \
     sudo="doas" \
@@ -11,37 +9,22 @@ alias \
     g="git" \
     mkd="mkdir -pv" \
     shd="sudo shutdown -h now" \
-
-# Programs
-alias \
     trm="transmission-remote" \
     emacs="emacsclient -nw -ca $EDITOR" \
     mdf="mednafen" \
     n64="mupen64plus" \
     mpv="mpv --no-sub-ass" \
-
-# Utilities
-alias \
     scrk="screenkey --no-whitespace -s small --bak-mode full -t 1 &" \
     showme="mpv --no-osc --autofit=30% /dev/video0" \
     mpp="mpv -playlist=".'' \
     enc="gpg -c --no-symkey-cache --cipher-algo AES256" \
-
-# Youtube-dl
-alias \
     yt="yt-dlp --add-metadata -i" \
     yta="yt -x -f bestaudio/best" \
     ytt="yt --write-thumbnail" \
-
-# Window swallowing.
-alias \
     mpv="swallow mpv" \
     ffplay="swallow ffplay" \
     zathura="swallow zathura" \
     nsxiv="swallow nsxiv" \
-
-# Adding color to commands.
-alias \
     ls="ls -hN --color=auto --group-directories-first" \
     dir="dir --color=auto" \
     vdir="vdir --color=auto" \

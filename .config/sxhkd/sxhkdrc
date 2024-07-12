@@ -1,0 +1,8 @@
+super + shift + b
+	firefox
+super + shift + f
+     lf
+super + alt + f
+     pcmanfm
+#ctrl + super + l
+     #slock

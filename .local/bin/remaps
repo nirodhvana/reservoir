@@ -1,0 +1,6 @@
+#!/bin/sh
+# This script is called on startup to remap keys.
+# Decrease key repeat delay to 300ms and increase key repeat rate to 50 per second.
+xset r rate 300 50
+# Map the caps lock key to esc & esc to caps lock.
+xmodmap -e "keycode 9 = Caps_Lock"; xmodmap -e "keycode 66 = Escape"

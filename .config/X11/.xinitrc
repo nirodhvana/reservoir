@@ -5,8 +5,9 @@
 start-pulseaudio-x11 &
 redshift-gtk -O 4500 &
 wal -R &
-sed -i 'N;$!P;D' $HOME/.cache/wal/colors-wal-dwm.h
+sed -i 'N;$!P;D' $HOME/.cache/wal/colors-wal-dwm.h &
 remaps &
+sxhkd &
 dunst &
 
 dwmblocks &

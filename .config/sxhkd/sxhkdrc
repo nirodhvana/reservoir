@@ -1,8 +1,23 @@
+# Launch Firefox
 super + shift + b
 	firefox
+
+# Launch Terminal file manager
 super + shift + f
-     lf
+     st -e /home/Saatwat/go/bin/lf
+
+# Launch GUI file manager
 super + alt + f
      pcmanfm
-#ctrl + super + l
-     #slock
+
+# Shut down
+super + shift + @Delete : Return
+	wmrc call hardware/power off
+
+# Reboot
+super + shift + ctrl + @Delete : Return
+	wmrc call hardware/power reboot
+
+# Launch Slock
+super + shift + l
+     slock

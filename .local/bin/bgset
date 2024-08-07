@@ -1,0 +1,3 @@
+#!/bin/sh
+var=$(cat $HOME/.cache/wal/wal)
+xwallpaper --focus $var

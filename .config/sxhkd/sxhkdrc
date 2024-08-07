@@ -19,5 +19,5 @@ super + shift + ctrl + @Delete : Return
 	wmrc call hardware/power reboot
 
 # Launch Slock
-super + shift + l
-     slock
+#super + shift + l
+#     slock

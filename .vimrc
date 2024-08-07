@@ -80,4 +80,4 @@ call plug#end()
 " Automatically deletes all trailing whitespace on save.
     autocmd BufWritePre * %s/\s\+$//e
 " Colorscheme
-    :colorscheme delek
+    :colo pablo

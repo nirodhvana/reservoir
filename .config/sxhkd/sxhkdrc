@@ -4,19 +4,31 @@ super + shift + b
 
 # Launch Terminal file manager
 super + shift + f
-     st -e /home/Saatwat/go/bin/lf
+     st -e "so ~/.bashrc && /home/Saatwat/go/bin/lf"
 
 # Launch GUI file manager
 super + alt + f
      pcmanfm
 
+# Launch Youtube-scraper in cli
+super + shift + y
+     st -e "ytfzf"
+
+# Lauch ani-cli
+super + shift + a
+     st -e "ani-cli"
+
+# Launch mangal
+super + shift + m
+     st -e "mangal"
+
 # Shut down
 super + shift + @Delete : Return
-	wmrc call hardware/power off
+     st -e "sudo shutdown -h now"
 
 # Reboot
 super + shift + ctrl + @Delete : Return
-	wmrc call hardware/power reboot
+     st -e "reboot"
 
 # Launch Slock
 #super + shift + l

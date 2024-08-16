@@ -1,2 +1,2 @@
-# dotfiles
-My Configs (Managed Using GNU STOW)
+# .files
+My DOTfiles (Managed Using GNU STOW)

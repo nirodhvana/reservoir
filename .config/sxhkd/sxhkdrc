@@ -4,11 +4,15 @@ super + shift + b
 
 # Launch Terminal file manager
 super + shift + f
-     st -e "so ~/.bashrc && /home/Saatwat/go/bin/lf"
+     st -e "lf.sh"
 
 # Launch GUI file manager
 super + alt + f
      pcmanfm
+
+# Launch GIMP
+super + shift + g
+     gimp
 
 # Launch Youtube-scraper in cli
 super + shift + y

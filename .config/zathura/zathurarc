@@ -2,7 +2,7 @@ set sandbox none
 set statusbar-h-padding 0
 set statusbar-v-padding 0
 set page-padding 5
-set font 'TimesNewRoman regular 10'
+set font 'GohuFont11NerdFontMono Regular 10'
 set selection-clipboard clipboard
 set completion-group-bg '1d1f21'
 set default-fg '1d1f21'

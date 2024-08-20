@@ -4,7 +4,7 @@ super + shift + b
 
 # Launch Terminal file manager
 super + shift + f
-     st -e "lf.sh"
+     st -e "/home/Saatwat/go/bin/lf"
 
 # Launch GUI file manager
 super + alt + f
@@ -18,6 +18,31 @@ super + shift + g
 super + shift + y
      st -e "ytfzf"
 
+# Launch qbittorrent
+super + shift + t
+     notify-send qbittorrent running
+     qbittorrent
+
+# increase volume
+super + shift + k
+     notify-send volume increased:10
+     pamixer --increase 10
+
+# decrease volume
+super + shift + j
+     notify-send volume decreased:10
+     pamixer --decrease 10
+
+# mute
+super + alt + m
+     notify-send Speakers Muted
+     pamixer --mute
+
+# unmute
+super + alt + u
+     notify-send Speakers unmuted
+     pamixer --unmute
+
 # Lauch ani-cli
 super + shift + a
      st -e "ani-cli"
@@ -28,12 +53,14 @@ super + shift + m
 
 # Shut down
 super + shift + @Delete : Return
-     st -e "sudo shutdown -h now"
+     notify-send shutting down
+     sudo shutdown -h now
 
 # Reboot
 super + shift + ctrl + @Delete : Return
-     st -e "reboot"
+     notify-send rebooting
+     reboot
 
 # Launch Slock
 #super + shift + l
-#     slock
+#    slock

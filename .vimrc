@@ -24,6 +24,7 @@ set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L]
 call plug#begin('~/.vim/plugged')
     Plug 'dense-analysis/ale'
     Plug 'LukeSmithxyz/vimling'
+    Plug 'dylanaraps/wal.vim'
     Plug 'farconics/victionary'
     Plug 'mattn/emmet-vim'
     Plug 'junegunn/goyo.vim'
@@ -80,4 +81,4 @@ call plug#end()
 " Automatically deletes all trailing whitespace on save.
     autocmd BufWritePre * %s/\s\+$//e
 " Colorscheme
-    colo pablo
+    colo wal

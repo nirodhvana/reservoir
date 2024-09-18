@@ -1,4 +1,4 @@
-set sandbox none
+set sandbox normal
 set statusbar-h-padding 0
 set statusbar-v-padding 0
 set page-padding 5
@@ -14,8 +14,6 @@ map r reload
 map R rotate
 map h left
 map k up
-map <C-k> zoom in
-map <C-j> zoom out
 map j down
 map l right
 map i recolor

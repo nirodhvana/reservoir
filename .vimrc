@@ -1,4 +1,3 @@
-let mapleader = '\'
 filetype plugin indent on
 
 set bg=dark "Setting background color to dark

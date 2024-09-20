@@ -1,24 +1,25 @@
 #!/bin/sh
+export PATH="${PATH}:${HOME}/.bashrc" &
 
 /usr/bin/syncthing serve --no-browser --logfile=default &
 /usr/libexec/geoclue-2.0/demos/agent &
+redshift -O 4500:4500 &
 start-pulseaudio-x11 &
-redshift-gtk -O 4500 &
-wal -R &
 remaps &
 sxhkd &
+bgset &
 dunst &
-sed -i 'N;$!P;D' $HOME/.cache/wal/colors-wal-dwm.h &
+mpd &
 
-dwmblocks &
-echo "no" > $HOME/.cache/wmExit
+slstatus &
+echo "no" > $HOME/.cache/wmExit &
 while true
 do
 	wmExit=$(cat $HOME/.cache/wmExit)
 	if [ $wmExit = "yes" ]
-	then
-		exit
-	else
-		dwm ;
-	fi
+ 	then
+         exit
+ 	else
+         dwm ;
+     fi
 done

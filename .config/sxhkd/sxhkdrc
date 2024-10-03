@@ -1,17 +1,17 @@
 # Launch Firefox
-super + alt + b
-	st -e "firefox"
+super + shift + b
+	firefox
 
 # Launch Terminal file manager
-super + ctrl + f
+super + alt + f
      st -e "source .bashrc && lf"
 
 # Launch GUI file manager
-super + alt + f
+super + shift + f
      pcmanfm
 
 # Launch GIMP
-super + alt + g
+super + shift + g
      gimp
 
 # Launch Youtube-scraper in cli

@@ -2,8 +2,7 @@
 export PATH="${PATH}:${HOME}/.bashrc" &
 
 /usr/bin/syncthing serve --no-browser --logfile=default &
-/usr/libexec/geoclue-2.0/demos/agent &
-redshift -O 4500:4500 &
+redshift -O 4500 &
 start-pulseaudio-x11 &
 remaps &
 sxhkd &
@@ -20,6 +19,7 @@ do
  	then
          exit
  	else
+         xrdb .Xresources
          dwm ;
      fi
 done

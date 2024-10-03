@@ -1,6 +1,6 @@
 #!/bin/sh
 # This script is called on startup to remap keys.
 # Decrease key repeat delay to 300ms and increase key repeat rate to 50 per second.
-xset r rate 300 50
+xset r rate 400 40
 # Map the caps lock key to esc & esc to caps lock.
 setxkbmap -option caps:swapescape

@@ -22,12 +22,12 @@ set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L]
 " Plugins
 call plug#begin('~/.vim/plugged')
     Plug 'dense-analysis/ale'
-    Plug 'LukeSmithxyz/vimling'
-    Plug 'dylanaraps/wal.vim'
-    Plug 'farconics/victionary'
     Plug 'junegunn/goyo.vim'
+    Plug 'junegunn/fzf.vim'
     Plug 'jreybert/vimagit'
     Plug 'ap/vim-css-color'
+    Plug 'LukeSmithxyz/vimling'
+    Plug 'farconics/victionary'
 call plug#end()
 
 " Some basics:
@@ -76,7 +76,9 @@ call plug#end()
 	inoremap <leader><leader> <Esc>/<Enter>"_c4l
 	vnoremap <leader><leader> <Esc>/<Enter>"_c4l
 	map <leader><leader> <Esc>/<Enter>"_c4l
+"Run xrdb whenever Xdefaults or Xresources are updated.
+     autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 " Automatically deletes all trailing whitespace on save.
-    autocmd BufWritePre * %s/\s\+$//e
+     autocmd BufWritePre * %s/\s\+$//e
 " Colorscheme
-    colo wal
+     colo delek

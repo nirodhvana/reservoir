@@ -1,2 +1,2 @@
-# .files
-My DOTfiles (Managed Using GNU STOW)
+# Reservoir
+A Reservoir Of My DOTfiles (Managed Using GNU STOW)

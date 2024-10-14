@@ -1,6 +1,7 @@
 set sandbox normal
 set statusbar-h-padding 0
 set statusbar-v-padding 0
+set statusbar-position
 set page-padding 5
 set font 'GohuFont11NerdFontMono Regular 10'
 set selection-clipboard clipboard
@@ -10,6 +11,7 @@ set default-bg '#918686'
 map u scroll half-up
 map d scroll half-down
 map D toggle_page_mode
+map f toggle_fullscreen
 map r reload
 map R rotate
 map h left

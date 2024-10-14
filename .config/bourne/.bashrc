@@ -10,6 +10,6 @@ HISTSIZE= HISTFILESIZE= # Infinite history
 [ -f "$HOME/.local/bin/" ] && . "$HOME/.local/bin" # load shell scripts
 [ -f "$HOME/.config/aliasrc" ] && . "$HOME/.config/aliasrc" # load aliases
 
-export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
-export LS_COLORS='di=4;35:fi=0:ln=33:pi=5:so=5:bd=5:cd=5:or=31:mi=37:ex=36:*.deb=31:*.rpm=31:*.png=35:*.jpg=35:*.c=92:*.jar=33:*.py=93:*.h=90:*.txt=94:*.odt=104:*.csv=102:*.rb=31:*.cpp=92:*.sh=92:*.html=96:*.zip=4;33:*.tar.gz=4;33:*.mp4=105:*.mp3=106:*.m4a=106:*.opus=106'
+export PS1="\[\033[38;5;1m\][\[$(tput sgr0)\]\[\033[38;5;3m\]\u\[$(tput sgr0)\]\[\033[38;5;156m\]@\[$(tput sgr0)\]\[\033[38;5;4m\]\h\[$(tput sgr0)\] \[$(tput sgr0)\]\[\033[38;5;5m\]\w\[$(tput sgr0)\]\[\033[38;5;1m\]]\[$(tput sgr0)\]\\$ \[$(tput sgr0)\]"
+export LS_COLORS='di=4;33:fi=0:ln=36:pi=5:so=5:bd=5:cd=5:or=31:mi=37:ex=36:*.deb=31;47:*.rpm=31;47:*.png=35:*.jpg=35:*.c=44:*.h=90:*.txt=97:*.odt=47:*.csv=47:*.cpp=44*.sh=41:*.html=44:*.zip=103:*.tar.gz=103:*.mp4=105:*.mp3=104:*.m4a=104:*.opus=104'
 export FZF_DEFAULT_OPTS='--bind "alt-j:down,alt-k:up,alt-j:preview-down,alt-k:preview-up"'

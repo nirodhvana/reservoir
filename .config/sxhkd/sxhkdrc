@@ -1,46 +1,59 @@
 # Launch Firefox
 super + shift + b
-	firefox
+	firefox &
 
 # Launch Terminal file manager
 super + alt + f
-     st -e "source .bashrc && lf"
+     st -e "/home/Saatwat/go/bin/lf" &
 
 # Launch GUI file manager
 super + shift + f
-     pcmanfm
+     pcmanfm &
+
+# Launch Thunderrbird
+super + shift + m
+     thunderbird &
+
+# Launch Lobster
+super + alt + m
+     st -e "lobster" &
+
+# Launch RSS
+super + alt + n
+     st -e "newsboat" &
+
+# Launch Printer
+super + ctrl + p
+     system-config-printer &
+
+# Launch Scanner
+super + ctrl + s
+     simple-scan &
+
+# Launch blueman
+super + ctrl + b
+     blueman-manager &
 
 # Launch GIMP
 super + shift + g
-     gimp
+     gimp &
 
 # Launch Youtube-scraper in cli
 super + alt + y
-     st -e "ytfzf"
+     st -e "ytfzf" &
 
 # Launch qbittorrent
-super + alt + t
-     notify-send qbittorrent running
-     qbittorrent
+super + shift + t
+     qbittorrent &
 
 # Launch ani-cli
 super + alt + a
-     st -e "ani-cli"
+     st -e "ani-cli" &
 
 # Launch mangal
 super + alt + m
-     st -e "mangal"
-
-# Shut down
-super + shift + @Delete : Return
-     notify-send shutting down
-     st -e "sudo shutdown -h now"
-
-# Reboot
-super + shift + ctrl + @Delete : Return
-     notify-send rebooting
-     st -e "reboot"
+     st -e "mangal" &
 
 # Launch Slock
-#super + shift + l
-#    slock
+super + shift + l
+     slock &

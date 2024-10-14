@@ -8,7 +8,6 @@ alias \
     g="git" \
     k="kill" \
     mk="make" \
-    m="man" \
     i="info --vi-keys" \
     info="info --vi-keys" \
     mkd="mkdir -pv" \
@@ -16,10 +15,12 @@ alias \
     trm="transmission-remote" \
     mdf="mednafen" \
     n64="mupen64plus" \
-    mpv="mpv --no-sub-ass" \
+    mpv="mpv --save-position-on-quit --no-sub-ass" \
+    rm="echo Use the full path i.e. '/bin/rm', consider using trash" \
     scrk="screenkey --no-whitespace -s small --bak-mode full -t 1 &" \
-    showme="mpv --no-osc --autofit=30% /dev/video0" \
-    mpp="mpv -playlist="."" \
+    showme="webcam.sh" \
+    mpp="mpv --no-video --playlist-shuffle ~/Music" \
+    mpa="mpv --playlist-shuffle ~/Music" \
     enc="gpg -c --no-symkey-cache --cipher-algo AES256" \
     yt="yt-dlp --add-metadata -i" \
     yta="yt-dlp -x -f bestaudio[ext=opus]/best[ext=opus]" \

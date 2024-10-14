@@ -2,24 +2,22 @@
 export PATH="${PATH}:${HOME}/.bashrc" &
 
 /usr/bin/syncthing serve --no-browser --logfile=default &
-redshift -O 4500 &
-start-pulseaudio-x11 &
-remaps &
-sxhkd &
-bgset &
-dunst &
-mpd &
+/usr/libexec/geoclue-2.0/demos/agent &
+redshift -O3500 &
 
-slstatus &
-echo "no" > $HOME/.cache/wmExit &
-while true
-do
-	wmExit=$(cat $HOME/.cache/wmExit)
-	if [ $wmExit = "yes" ]
- 	then
-         exit
- 	else
-         xrdb .Xresources
-         dwm ;
-     fi
-done
+autostart="remaps bgset compton dunst unclutter sxhkd pipewire"
+
+for program in $autostart; do
+	pidof -sx "$program" || "$program" &
+done >/dev/null 2>&1
+
+# Activate dbus variables
+systemctl --user import-environment DISPLAY XAUTHORITY
+dbus-update-activation-environment --verbose --all DISPLAY XAUTHORITY
+
+while true; do
+    slstatus &
+    xrdb $HOME/.Xresources &
+    dbus-launch dwm
+    notify-send "remember to blink, boys"
+done >/dev/null 2>&1

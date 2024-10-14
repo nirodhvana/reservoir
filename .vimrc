@@ -17,6 +17,7 @@ set ar "Automatically read a file that has been changed outside of Vim
 set fileformat=unix
 set showcmd "Show (partial) command in the last line of the screen
 set wrap "Enables line wrapping, default break at character
+set timeoutlen=500 ttimeoutlen=15 "Mitigating delay when pressing esc
 set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L]
 
 " Plugins

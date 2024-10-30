@@ -1,59 +1,70 @@
 # Launch Firefox
 super + shift + b
-	firefox &
+	firefox ;
+
+# Screenshots
+Print
+     sleep 0.2; \
+     scrot -d3 $HOME/'Pictures/screenshots/%Y-%m-%d-%s_$wx$h.png';
+     notify-send --urgency=low --hint=string:x-dunst-stack-tag:scrot 'Screenshot taken' 'Selection'
+
+Control+Print
+     sleep 0.2; \
+     scrot -s $HOME/'Pictures/screenshots/%Y-%m-%d_%H%M%S-$wx$h.png'; \
+     notify-send --urgency=low --hint=string:x-dunst-stack-tag:scrot 'Screenshot taken' 'Selection'
 
 # Launch Terminal file manager
 super + alt + f
-     st -e "/home/Saatwat/go/bin/lf" &
+     st -e "/home/Saatwat/go/bin/lf";
 
 # Launch GUI file manager
 super + shift + f
-     pcmanfm &
+     pcmanfm;
 
-# Launch Thunderrbird
-super + shift + m
-     thunderbird &
+# Launch Thunderbird
+alt+F10
+     thunderbird;
 
 # Launch Lobster
-super + alt + m
-     st -e "lobster" &
+super+alt+m
+     st -e "lobster";
 
 # Launch RSS
-super + alt + n
-     st -e "newsboat" &
+alt + F9
+     st -e "newsboat";
 
 # Launch Printer
 super + ctrl + p
-     system-config-printer &
+     system-config-printer ;
 
 # Launch Scanner
 super + ctrl + s
-     simple-scan &
+     simple-scan ;
 
 # Launch blueman
 super + ctrl + b
-     blueman-manager &
+     blueman-manager ;
 
 # Launch GIMP
 super + shift + g
-     gimp &
+     gimp ;
 
 # Launch Youtube-scraper in cli
 super + alt + y
-     st -e "ytfzf" &
+     st -e "ytfzf" ;
 
 # Launch qbittorrent
 super + shift + t
-     qbittorrent &
+     qbittorrent ;
 
 # Launch ani-cli
 super + alt + a
-     st -e "ani-cli" &
+     st -e "ani-cli" ;
 
 # Launch mangal
 super + alt + m
-     st -e "mangal" &
+     st -e "mangal" ;
 
 # Launch Slock
 super + shift + l
-     slock &
+     slock ;

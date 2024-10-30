@@ -3,9 +3,10 @@ export PATH="${PATH}:${HOME}/.bashrc" &
 
 /usr/bin/syncthing serve --no-browser --logfile=default &
 /usr/libexec/geoclue-2.0/demos/agent &
+/usr/libexec/at-spi-bus-launcher --launch-immediately &
 redshift -O3500 &
 
-autostart="remaps bgset compton dunst unclutter sxhkd pipewire"
+autostart="remaps bgset compton dunst unclutter sxhkd pipewire bluetoothd system-config-printer-applet"
 
 for program in $autostart; do
 	pidof -sx "$program" || "$program" &

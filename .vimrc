@@ -29,6 +29,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'ap/vim-css-color'
     Plug 'LukeSmithxyz/vimling'
     Plug 'farconics/victionary'
+    Plug 'lervag/vimtex'
 call plug#end()
 
 " Some basics:

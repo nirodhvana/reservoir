@@ -1,5 +1,5 @@
 ! special
-*.foreground:   #c1c0c0
+*.foreground:   #6d8d5f
 *.background:   #090604
 *.cursorColor:  #c1c0c0
 
@@ -8,12 +8,12 @@
 *.color8:       #9f6d4e
 
 ! red
-*.color1:       #c9372a
+*.color1:       #C9372A
 *.color9:       #D36105
 
 ! green
-*.color2:       #6d8d5f
-*.color10:      #a5995e
+*.color2:       #a5995e
+*.color10:      #6d8d5f
 
 ! yellow
 *.color3:       #e6a635

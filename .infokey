@@ -2,10 +2,8 @@ gg      first-node
 G       last-node
 \mb     beginning-of-node
 \me     end-of-node
-h       left-arrow
 j       next-line
 k       prev-line
-l       right-arrow
 
 f       scroll-forward-page-only
 ^f      scroll-forward-page-only

@@ -3,9 +3,9 @@ stty -ixon # Disable ctrl-s and ctrl-q
 shopt -s autocd # Allows you to cd into directory merely by typing the directory name.
 shopt -s histappend # append to the history file, don't overwrite it
 set -o vi # Enables vi mode in terminal
-export EDITOR='vi'
-export VISUAL='vi'
-HISTSIZE= HISTFILESIZE= # Infinite history
+export EDITOR="vi"
+export VISUAL="vi"
+export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nornu noma laststatus=1' -\"" # Open Manpages In Vim.
 
 [ -f "$HOME/.local/bin/" ] && . "$HOME/.local/bin" # load shell scripts
 [ -f "$HOME/.config/aliasrc" ] && . "$HOME/.config/aliasrc" # load aliases

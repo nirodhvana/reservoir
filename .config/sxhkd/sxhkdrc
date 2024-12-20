@@ -5,10 +5,10 @@ super + shift + b
 # Screenshots
 Print
      sleep 0.2; \
-     scrot -d3 $HOME/'Pictures/screenshots/%Y-%m-%d-%s_$wx$h.png';
+     scrot -d3 $HOME/'Pictures/screenshots/%Y-%m-%d-%s_$wx$h.png'; \
      notify-send --urgency=low --hint=string:x-dunst-stack-tag:scrot 'Screenshot taken' 'Selection'
 
-Control+Print
+ctrl+Print
      sleep 0.2; \
      scrot -s $HOME/'Pictures/screenshots/%Y-%m-%d_%H%M%S-$wx$h.png'; \
      notify-send --urgency=low --hint=string:x-dunst-stack-tag:scrot 'Screenshot taken' 'Selection'
@@ -22,7 +22,7 @@ super + shift + f
      pcmanfm;
 
 # Launch Thunderbird
-alt+F10
+super + shift + m
      thunderbird;
 
 # Launch Lobster
@@ -30,7 +30,7 @@ super+alt+m
      st -e "lobster";
 
 # Launch RSS
-alt + F9
+super +alt + n
      st -e "newsboat";
 
 # Launch Printer
@@ -43,7 +43,7 @@ super + ctrl + s
 
 # Launch blueman
 super + ctrl + b
-     blueman-manager ;
+     st -e "bluetoothctl" ;
 
 # Launch GIMP
 super + shift + g
@@ -51,7 +51,7 @@ super + shift + g
 
 # Launch Youtube-scraper in cli
 super + alt + y
-     st -e "ytfzf" ;
+     st -e "~/.local/scripts/yt" ;
 
 # Launch qbittorrent
 super + shift + t
@@ -64,6 +64,14 @@ super + alt + a
 # Launch mangal
 super + alt + m
      st -e "mangal" ;
+
+# Launch Music
+super + shift+ p
+     ~/.local/bin/harmonica &
+
+#Shuffling albums only
+super + alt + p
+     st -e "cd ~/Music && mpar.sh" &
 
 # Launch Slock
 super + shift + l

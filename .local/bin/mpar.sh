@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script wasnt written by me.
+# This script wasN'T written by me.
 # Original author: https://gist.github.com/kanliot/0187f7aad0a45be8c624a41ebb705f40
 # runs mpv --vid=no
 # Do you want to play 10 albums, shuffling the albums, but not shuffling t the songs on the albums?

@@ -18,69 +18,80 @@ set fileformat=unix
 set showcmd "Show (partial) command in the last line of the screen
 set wrap "Enables line wrapping, default break at character
 set timeoutlen=500 ttimeoutlen=15 "Mitigating delay when pressing esc
-set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L]
+set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L] laststatus=2
 
 " Plugins
 call plug#begin('~/.vim/plugged')
-    Plug 'dense-analysis/ale'
     Plug 'junegunn/goyo.vim'
-    Plug 'junegunn/fzf.vim'
     Plug 'jreybert/vimagit'
     Plug 'ap/vim-css-color'
-    Plug 'LukeSmithxyz/vimling'
-    Plug 'farconics/victionary'
     Plug 'lervag/vimtex'
+    Plug 'LukeSmithxyz/vimling'
 call plug#end()
 
 " Some basics:
-	nnoremap c "_c
-	set nocp "Making Vim behave in a more useful way than vi
-	syntax on
-	set enc=utf-8 "Sets the character encoding used inside Vim
-	set rnu "Show the line number relative to the line with the cursor in front of each line
+nnoremap c "_c
+set nocp "Making Vim behave in a more useful way than vi
+syntax on
+set enc=utf-8 "Sets the character encoding used inside Vim
+set rnu "Show the line number relative to the line with the cursor in front of each line
+
+" Built-in Fuzzy-finder
+set wildmenu path+=**
+
+" Tweaks for Built-in file browsing
+let g:netrw_banner=0        " disable annoying banner
+let g:netrw_browse_split=4  " open in prior window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+
 " Enable autocompletion:
-	set wildmode=longest,list,full
+set wildmode=longest,list,full
+
 " Disables automatic commenting on newline:
-	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
-	set splitbelow splitright
+set splitbelow splitright
+
 " Shortcutting split navigation, saving a keypress:
-	map <C-h> <C-w>h
-	map <C-j> <C-w>j
-	map <C-k> <C-w>k
-	map <C-l> <C-w>l
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
 " Check file in shellcheck:
-     map <leader>sc :!clear && shellcheck -x %<CR>
-" Goyo mappings
-     map <leader>f :Goyo<CR>
-" Victionary mappings
-     let g:victionary#map_defaults = 0
-     nmap <leader>mp <Plug>(victionary#define_prompt)
-     nmap <leader>mc <Plug>(victionary#define_under_cursor)
-     nmap <leader>ms <Plug>(victionary#synonym_prompt)
-     nmap <leader>sc <Plug>(victionary#synonym_under_cursor)
+map <leader>sc :!clear && shellcheck -x %<CR>
+
+" Extensions mappings:
+map <leader>m :Magit<CR>
+map <leader>f :Goyo<CR>
+
 " Spell-check set to F6 and the British English library.
-     map <F6> :setlocal spell! spelllang=en_gb<CR>
+map <F6> :setlocal spell! spelllang=en_gb<CR>
+
 " Replace all is aliased to S.
-	nnoremap S :%s//g<Left><Left>
+nnoremap S :%s//g<Left><Left>
+
 " Copy selected text to system clipboard (requires gvim/vim-gtk3 installed):
-	nnoremap <C-y> "+y
-	vnoremap <C-y> "+y
-     nnoremap <C-p> "+gP
-     vnoremap <C-p> "+gP
+nnoremap <C-y> "+y
+vnoremap <C-y> "+y
+nnoremap <C-p> "+gP
+vnoremap <C-p> "+gP
+
 " Newtab with ctrl+t
-	nnoremap <silent> <C-t> :tabnew<CR>
-" Compile document, be it groff/LaTeX/etc.
-	map <leader>c :w! \| !compiler <c-r>%<CR>
-" Open corresponding .pdf/.html or preview
-	map <leader>p :!opout <c-r>%<CR><CR>
+nnoremap <silent> <C-t> :tabnew<CR>
+
 " Navigating with guides
-	inoremap <leader><leader> <Esc>/<Enter>"_c4l
-	vnoremap <leader><leader> <Esc>/<Enter>"_c4l
-	map <leader><leader> <Esc>/<Enter>"_c4l
+inoremap <leader><leader> <Esc>/<Enter>"_c4l
+vnoremap <leader><leader> <Esc>/<Enter>"_c4l
+map <leader><leader> <Esc>/<Enter>"_c4l
+
 "Run xrdb whenever Xdefaults or Xresources are updated.
-     autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
+autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
+
 " Automatically deletes all trailing whitespace on save.
-     autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritePre * %s/\s\+$//e
+
 " Colorscheme
-     colo delek
+colo delek

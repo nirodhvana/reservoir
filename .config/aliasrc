@@ -22,7 +22,7 @@ alias \
     mpp="mpv --no-video --playlist-shuffle ~/Music" \
     mpa="mpv --playlist-shuffle ~/Music" \
     enc="gpg -c --no-symkey-cache --cipher-algo AES256" \
-    yt="yt-dlp --add-metadata -i" \
+    ytv="yt-dlp --add-metadata -i" \
     yta="yt-dlp -x -f bestaudio[ext=opus]/best[ext=opus]" \
     ytt="yt --write-thumbnail" \
     sdl="spotdl --format opus" \

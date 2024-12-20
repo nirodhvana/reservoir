@@ -1,0 +1,10 @@
+#!/bin/sh
+# https://git.sr.ht/~bpv/dotfiles/tree/master/item/.local/bin/music
+# Simple mpv music script
+mpv --geometry=200x200+1600+800 \
+	--shuffle \
+	--x11-name=no-title \
+	--player-operation-mode=pseudo-gui \
+	--no-terminal \
+	"$@" \
+	-- $HOME/Music/

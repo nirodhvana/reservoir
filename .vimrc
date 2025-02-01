@@ -95,3 +95,6 @@ autocmd BufWritePre * %s/\s\+$//e
 
 " Colorscheme
 colo delek
+
+" VimTeX
+let g:vimtex_complete_enabled = 1

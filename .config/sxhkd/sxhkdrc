@@ -76,3 +76,7 @@ super + alt + p
 # Launch Slock
 super + shift + l
      slock ;
+
+# Network Manager
+super + ctrl + n
+     st -e "nmtui"

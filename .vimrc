@@ -23,7 +23,11 @@ set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L] laststatus=2
 " Plugins
 call plug#begin('~/.vim/plugged')
     Plug 'junegunn/goyo.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
     Plug 'jreybert/vimagit'
+    Plug 'dense-analysis/ale'
     Plug 'ap/vim-css-color'
     Plug 'lervag/vimtex'
     Plug 'LukeSmithxyz/vimling'
@@ -65,7 +69,8 @@ map <leader>sc :!clear && shellcheck -x %<CR>
 
 " Extensions mappings:
 map <leader>m :Magit<CR>
-map <leader>f :Goyo<CR>
+map <leader>g :Goyo<CR>
+map <leader>f :Files<CR>
 
 " Spell-check set to F6 and the British English library.
 map <F6> :setlocal spell! spelllang=en_gb<CR>
@@ -94,7 +99,11 @@ autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 autocmd BufWritePre * %s/\s\+$//e
 
 " Colorscheme
-colo delek
+colo industry
 
 " VimTeX
 let g:vimtex_complete_enabled = 1
+
+" ALE
+let g:ale_completion_enabled = 1
+let g:ale_floating_preview = 1

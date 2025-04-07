@@ -8,7 +8,7 @@ xrdb $HOME/.Xresources &
 pamixer --set-volume 100 &
 redshift -O 3500 &
 
-autostart="remaps picom dunst unclutter sxhkd bluetoothd pipewire pipewire-pulse ipp-usb cupsd avahi-daemon"
+autostart="remaps picom dunst unclutter sxhkd bluetoothd blueman-applet pipewire pipewire-pulse ipp-usb cupsd avahi-daemon"
 
 for program in $autostart; do
 	pidof -sx "$program" || "$program" &
@@ -18,7 +18,7 @@ done >/dev/null 2>&1
 systemctl --user import-environment DISPLAY XAUTHORITY
 [ -z "$DBUS_SESSION_BUS_ADDRESS" ] && eval $(/usr/bin/dbus-launch --exit-with-session --sh-syntax)
 dbus-update-activation-environment --verbose --all DISPLAY XAUTHORITY
-systemctl --user --now enable pipewire pipewire-pulse
+systemctl --user --now enable pipewire pipewire-pulse bluetoothd
 
 # Fix overscan problem on HDMI TV when underscan isnt available
 # Docs: https://www.engadget.com/2010-05-27-hd-101-overscan-and-why-all-tvs-do-it.htm://www.engadget.com/2010-05-27-hd-101-overscan-and-why-all-tvs-do-it.html

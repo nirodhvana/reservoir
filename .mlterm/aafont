@@ -1,8 +1,7 @@
-DEFAULT = GohuFont 11 Nerd Font Mono , 14
-#DEFAULT = Annapurna SIL, 14
-UNICODE = Font Awesome, 14
-ISCII_HINDI = Annapurna SIL, 14
-U+900-97f = Annapurna SIL, 14
-U+FF61-FF9F = Annapurna SIL, 14
-U+900-d7f = Annapurna SIL, 14
-ISO10646_UCS4_1 = Annapurna SIL, 14
+DEFAULT = GohuFont 14 Nerd Font Propo Bold 14
+ISCII_HINDI = Annapurna SIL Bold 15
+U+900-97f = Annapurna SIL Bold 15
+U+FF61-FF9F = Annapurna SIL Bold 15
+U+900-d7f = Annapurna SIL Bold 15
+ISO10646_UCS4_1 = GohuFont 14 Nerd Font Propo Bold 14
+ISO10646_UCS4_1_FULLWIDTH = GohuFont 14 Nerd Font Propo Bold 14

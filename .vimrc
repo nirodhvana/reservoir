@@ -24,7 +24,6 @@ set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L] laststatus=2
 call plug#begin('~/.vim/plugged')
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
     Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
     Plug 'jreybert/vimagit'
     Plug 'dense-analysis/ale'

@@ -1,6 +1,8 @@
 #!/bin/sh
 alias \
     v="$EDITOR" \
+    vi="$EDITOR" \
+    vim="$EDITOR" \
     sudo="doas" \
     cp="cp -iv" \
     mv="mv -iv" \

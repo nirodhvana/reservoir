@@ -1,6 +1,6 @@
 set shell sh # Interpreter for shell commands
 set icons # Enable icons
-set drawbox # Enable Borders around columns
+#set drawbox # Enable Borders around columns
 
 # Image Previews using ctpv
 set previewer ctpv

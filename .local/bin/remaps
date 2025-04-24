@@ -2,5 +2,5 @@
 # This script is called on startup to remap keys.
 # Decrease key repeat delay and increase key repeat rate per second.
 xset r rate 500 45
-# Map the caps lock key to esc & esc to caps lock.
+# Swap the function of caps lock & esc.
 setxkbmap -option caps:swapescape

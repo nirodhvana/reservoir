@@ -1,6 +1,6 @@
 # Launch Firefox
 super + shift + b
-	firefox ;
+	librewolf ;
 
 # Screenshots
 Print

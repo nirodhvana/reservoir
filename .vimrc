@@ -20,18 +20,6 @@ set wrap "Enables line wrapping, default break at character
 set timeoutlen=500 ttimeoutlen=15 "Mitigating delay when pressing esc
 set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L] laststatus=2
 
-" Plugins
-call plug#begin('~/.vim/plugged')
-    Plug 'junegunn/goyo.vim'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
-    Plug 'jreybert/vimagit'
-    Plug 'dense-analysis/ale'
-    Plug 'ap/vim-css-color'
-    Plug 'lervag/vimtex'
-    Plug 'LukeSmithxyz/vimling'
-call plug#end()
-
 " Some basics:
 nnoremap c "_c
 set nocp "Making Vim behave in a more useful way than vi
@@ -101,8 +89,8 @@ autocmd BufWritePre * %s/\s\+$//e
 colo industry
 
 " VimTeX
-let g:vimtex_complete_enabled = 1
+"let g:vimtex_complete_enabled = 1
 
 " ALE
-let g:ale_completion_enabled = 1
-let g:ale_floating_preview = 1
+"let g:ale_completion_enabled = 1
+"let g:ale_floating_preview = 1

@@ -14,7 +14,6 @@ alias \
     info="info --vi-keys" \
     mkd="mkdir -pv" \
     shd="sudo shutdown -h now" \
-    trm="transmission-remote" \
     mdf="mednafen" \
     n64="mupen64plus" \
     mpv="mpv --save-position-on-quit --no-sub-ass" \
@@ -27,7 +26,6 @@ alias \
     ytv="yt-dlp -i" \
     yta="yt-dlp -x -f bestaudio[ext=opus]/best[ext=opus]" \
     ytt="yt --write-thumbnail" \
-    sdl="spotdl --format opus" \
     d="devour" \
     mpv="d mpv" \
     zathura="d zathura" \

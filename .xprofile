@@ -1,7 +1,1 @@
-# setting important variables
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_SESSION_TYPE=x11
-export DISPLAY=:0
-export XAUTHORITY="$HOME/.Xauthority"
+.config/xorg/.xprofile

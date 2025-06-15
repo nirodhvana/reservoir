@@ -1,6 +1,5 @@
 #!/bin/sh
-
-autostart="remaps picom dunst unclutter sxhkd bluetoothd blueman-applet pipewire qpwgraph cupsd cups-browsed"
+autostart="picom dunst unclutter sxhkd pipewire bluetoothd blueman-applet qpwgraph"
 
 for program in $autostart; do
 	pidof -sx "$program" || "$program" &

@@ -8,6 +8,3 @@
 
 # set PATH so it includes user's private bin if it exists
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
-
-# set PATH so it includes GOPATH if it exists
-#[ -d "$(go env GOPATH)/bin" ] && PATH="$(go env GOPATH)/bin:$PATH"

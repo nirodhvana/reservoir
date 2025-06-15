@@ -18,6 +18,9 @@ autostart &
 # Soln: https://evilshit.wordpress.com/2012/08/09/how-to-remove-overscan-on-hdmi-1080p-output/
 xrandr --output HDMI1 --set audio force-dvi --mode 1920x1080
 
+emacs --daemon
+wpctl set-volume @DEFAULT_AUDIO_SINK@ 70
+
 echo "no" > $HOME/.cache/wmExit
 
 while true

@@ -1,11 +1,10 @@
 filetype plugin indent on
 
 set bg=dark "Setting background color to dark
-set go=a
 set mouse=a "Enabling mouse in all modes
 set mousehide "Automatically hide mouse in vim
+"set clipboard=unnamed "Syncing your primary vim register with the system clipboard
 set hls is "When there is a previous search pattern, highlight all its matches.
-set clipboard*=unnamedplus "Syncing your primary vim register with the system clipboard
 set ts=5 "Number of spaces that a <Tab> counts for
 set sts=4 "Number of spaces that a <Tab> counts for while performing editing operations
 set shiftwidth=4
@@ -19,10 +18,6 @@ set showcmd "Show (partial) command in the last line of the screen
 set wrap "Enables line wrapping, default break at character
 set timeoutlen=500 ttimeoutlen=15 "Mitigating delay when pressing esc
 set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L] laststatus=2
-
-call plug#begin
-Plug 'ap/vim-css-color'
-call plug#end()
 
 " Some basics:
 nnoremap c "_c

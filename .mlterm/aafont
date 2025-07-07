@@ -1,7 +1,7 @@
-DEFAULT = Iosevka 18
+DEFAULT = Iosevka Nerd Font Propo 18
 ISCII_HINDI = Annapurna SIL 18
 U+900-97f = Annapurna SIL 18
 U+FF61-FF9F = Annapurna SIL 18
 U+900-d7f = Annapurna SIL 18
-ISO10646_UCS4_1 = Iosevka 18
-ISO10646_UCS4_1_FULLWIDTH = Iosevka 18
+ISO10646_UCS4_1 = Iosevka Nerd Font Propo 18
+ISO10646_UCS4_1_FULLWIDTH = Iosevka Nerd Font Propo 18

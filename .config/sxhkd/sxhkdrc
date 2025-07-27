@@ -15,7 +15,7 @@ ctrl+Print
 
 # Launch Terminal file manager
 super + alt + f
-     st -e "/home/Saatwat/go/bin/lf";
+     mlterm -e "lf";
 
 # Launch GUI file manager
 super + shift + f
@@ -27,11 +27,11 @@ super + shift + m
 
 # Launch Lobster
 super+alt+m
-     st -e "lobster";
+     mlterm -e "lobster";
 
 # Launch RSS
 super +alt + n
-     st -e "newsboat";
+     mlterm -e "newsboat";
 
 # Launch Printer
 super + ctrl + p
@@ -43,7 +43,7 @@ super + ctrl + s
 
 # Launch blueman
 super + ctrl + b
-     st -e "bluetoothctl" ;
+     mlterm -e "bluetoothctl" ;
 
 # Launch GIMP
 super + shift + g
@@ -51,7 +51,7 @@ super + shift + g
 
 # Launch Youtube-scraper in cli
 super + alt + y
-     st -e "~/.local/scripts/yt" ;
+     mlterm -e "~/.local/scripts/yt" ;
 
 # Launch qbittorrent
 super + shift + t
@@ -59,11 +59,11 @@ super + shift + t
 
 # Launch ani-cli
 super + alt + a
-     st -e "ani-cli" ;
+     mlterm -e "ani-cli" ;
 
 # Launch mangal
 super + alt + m
-     st -e "mangal" ;
+     mlterm -e "mangal" ;
 
 # Launch Music
 super + shift+ p
@@ -71,7 +71,7 @@ super + shift+ p
 
 #Shuffling albums only
 super + alt + p
-     st -e "cd ~/Music && mpar.sh" &
+     mlterm -e "cd ~/Music && mpar.sh" &
 
 # Launch Slock
 super + shift + l
@@ -79,4 +79,8 @@ super + shift + l
 
 # Network Manager
 super + ctrl + n
-     st -e "nmtui"
+     mlterm -e "nmtui"
+
+# Emacsclient
+super + ctrl + e
+     emacsclient -c

@@ -1,26 +1,10 @@
-# Set keyboard options
-riverctl set-repeat 50 500
+# Set keyboard options riverctl set-repeat 50 500
 riverctl keyboard-layout en
-
-# Set tiling and display options
-riverctl spawn rivertile
-riverctl default-layout rivertile
-riverctl allow-tearing disabled
-
-# Set background and border color and size
-riverctl border-width 2
-riverctl border-color-focused 0x18857e
-riverctl border-color-unfocused 0x090604
-riverctl border-color-urgent 0xC9372A
 
 # Set cursor options
 riverctl hidecursor timeout 20
 riverctl hidecursor when-typing enabled
 riverctl focus-follows-cursor always
-riverctl xcursor-theme Breeze_Light [1]
-
-# Mapping to start an instance of mlterm
-riverctl map normal Super Return spawn foot
 
 # Mapping to close the focused view
 riverctl map normal Super X close
@@ -42,7 +26,7 @@ riverctl map normal Super Period focus-output next
 riverctl map normal Super Comma focus-output previous
 
 # Super+Return to bump the focused view to the top of the layout stack
-riverctl map normal Super Return zoom
+riverctl map normal Super Backspace zoom
 
 # Super+H and Super+L to decrease/increase the main ratio of rivertile(1)
 riverctl map normal Super H send-layout-cmd rivertile "main-ratio -0.05"
@@ -63,3 +47,57 @@ riverctl map normal Super+Alt+Control H snap left
 riverctl map normal Super+Alt+Control J snap down
 riverctl map normal Super+Alt+Control K snap up
 riverctl map normal Super+Alt+Control L snap right
+
+# Set tiling and display options
+riverctl default-layout wideriver
+riverctl allow-tearing disabled
+
+wideriver \
+                  --layout                       left        \
+                  --layout-alt                   monocle     \
+                  --stack                        dwindle     \
+                  --count-master                 1           \
+                  --ratio-master                 0.50        \
+                  --count-wide-left              0           \
+                  --ratio-wide                   0.35        \
+                  --no-smart-gaps                            \
+                  --inner-gaps                   8           \
+                  --outer-gaps                   8           \
+                  --border-width                 2           \
+                  --border-width-monocle         2           \
+                  --border-width-smart-gaps      2           \
+                  --border-color-focused         "0x2e5d66"  \
+                  --border-color-focused-monocle "0x2e5d66"  \
+                  --border-color-unfocused       "0x090604"  \
+                  --log-threshold                info        \
+                 > "/tmp/wideriver.${XDG_VTNR}.${USER}.log" 2>&1 &
+
+# Keybindings for launching apps
+riverctl map normal Super Return spawn foot
+riverctl map normal Super Semicolon spawn "bemenu-run -l 15 -p "Launch:" --binding vim"
+riverctl map normal Super+Shift F spawn pcmanfm
+riverctl map normal Super+Shift B spawn librewolf
+riverctl map normal Super+Shift G spawn gimp
+riverctl map normal Super+Shift T spawn qbittorrent
+riverctl map normal Super+Shift P spawn "~/.local/bin/harmonica &"
+riverctl map normal Super+Alt P spawn "foot -e "cd ~/Music && mpar.sh""
+riverctl map normal Super+Alt F spawn "foot -e "lf""
+riverctl map normal Super+Alt N spawn "foot -e "newsboat""
+riverctl map normal Super+Alt A spawn "foot -e "ani-cli""
+riverctl map normal Super+Alt M spawn "foot -e "mangal""
+riverctl map normal Super+Control P spawn system-config-printer
+riverctl map normal Super+Control S spawn simple-scan
+riverctl map normal Super+Control B spawn blueman-manager
+riverctl map normal Super+Control N spawn "foot -e "nmtui""
+riverctl map normal Super+Control E spawn "emacsclient -c"
+
+# Enable Server Side Decoration to prevent gui border glitches.
+riverctl rule-add ssd
+
+pipewire &
+bluetoothd &
+gammastep -O 3500 &
+dunst &
+emacs --daemon
+swaybg -i ~/Downloads/244898.jpg &
+slstatus -s | dam

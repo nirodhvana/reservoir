@@ -1,0 +1,3 @@
+gtk-application-prefer-dark-theme=1
+gtk-menu-popup-delay=0
+gtk-dialogs-use-header=false

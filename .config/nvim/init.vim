@@ -1,5 +1,9 @@
 filetype plugin indent on
 
+" foot keys break input solution
+let &t_TI = "\<Esc>[>4;2m"
+let &t_TE = "\<Esc>[>4m"
+
 set bg=dark "Setting background color to dark
 set mouse=a "Enabling mouse in all modes
 set mousehide "Automatically hide mouse in vim
@@ -25,6 +29,10 @@ set nocp "Making Vim behave in a more useful way than vi
 syntax on
 set enc=utf-8 "Sets the character encoding used inside Vim
 set rnu "Show the line number relative to the line with the cursor in front of each line
+
+call plug#begin()
+Plug 'ap/vim-css-color'
+call plug#end()
 
 " Built-in Fuzzy-finder
 set wildmenu path+=**
@@ -83,3 +91,6 @@ autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 
 " Automatically deletes all trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
+
+" Colorscheme
+colo pablo

@@ -1,1 +1,1 @@
-.config/vim/.vimrc
+.config/nvim/init.vim

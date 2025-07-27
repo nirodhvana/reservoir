@@ -8,3 +8,6 @@
 
 # set PATH so it includes user's private bin if it exists
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
+
+# Enable Wayland for Firefox
+[[ "$XDG_SESSION_TYPE" == "wayland" ]] && export MOZ_ENABLE_WAYLAND=1

@@ -1,0 +1,29 @@
+[global]
+    monitor = 0
+    follow = keyboard
+    width = 370
+    height = (0,350)
+    offset = (0,19)
+    padding = 2
+    horizontal_padding = 2
+    transparency = 25
+    font = Iosevka Nerd Font Propo 15
+    format = "<b>%s</b>\n%b"
+
+[urgency_low]
+    foreground = "#090604"
+    background = "#2e5d66"
+    frame_color = "#2e5d66"
+    timeout = 10
+
+[urgency_normal]
+    foreground = "#090604"
+    background = "#6d8d5f"
+    frame_color = "#6d8d5f"
+    timeout = 25
+
+[urgency_critical]
+    foreground = "#090604"
+    background = "#C9372A"
+    frame_color = "#C9372A"
+    timeout = 0

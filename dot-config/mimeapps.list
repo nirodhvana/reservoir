@@ -3,9 +3,13 @@ image/jpeg=foo.desktop
 image/jpg=foo.desktop
 image/png=foo.desktop
 image/gif=foo.desktop
+inode/directory=pcmanfm.desktop;
+inode/mount-point=pcmanfm.desktop
+
 [Added Associations]
 video/H264=bar.desktop
 video/mp4=bar.desktop
 video/mkv=bar.desktop
-video/H264=bar.desktop
+inode/mount-point=pcmanfm.desktop;
+
 [Removed Associations]

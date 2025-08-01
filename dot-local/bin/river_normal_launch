@@ -1,0 +1,5 @@
+#!/bin/sh
+
+$@ &
+riverctl enter-mode normal
+

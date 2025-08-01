@@ -1,1 +1,1 @@
-.config/bourne/.bash_profile
+dot-config/bourne/.bash_profile

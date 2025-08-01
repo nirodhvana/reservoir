@@ -1,1 +1,1 @@
-.config/xorg/.xinitrc
+dot-config/xorg/.xinitrc

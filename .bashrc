@@ -1,1 +1,1 @@
-.config/bourne/.bashrc
+dot-config/bourne/.bashrc

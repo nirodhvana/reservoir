@@ -4,6 +4,15 @@ filetype plugin indent on
 let &t_TI = "\<Esc>[>4;2m"
 let &t_TE = "\<Esc>[>4m"
 
+" Colorscheme
+colo torte
+
+" Transparency
+highlight Normal guibg=none
+highlight NonText guibg=none
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+
 set bg=dark "Setting background color to dark
 set mouse=a "Enabling mouse in all modes
 set mousehide "Automatically hide mouse in vim
@@ -92,5 +101,4 @@ autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 " Automatically deletes all trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
 
-" Colorscheme
-colo pablo
+

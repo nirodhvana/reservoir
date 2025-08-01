@@ -4,11 +4,13 @@ alias \
     vi="$EDITOR" \
     vim="$EDITOR" \
     sudo="doas" \
+    stow="stow --dotfiles" \
+    stowsync="stowsync.sh" \
     cp="cp -iv" \
     mv="mv -iv" \
     rm="rm -v" \
     g="git" \
-    k="kill" \
+    k="killall" \
     mk="make" \
     i="info --vi-keys" \
     info="info --vi-keys" \

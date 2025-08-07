@@ -16,7 +16,7 @@ highlight NonText ctermbg=none
 set bg=dark "Setting background color to dark
 set mouse=a "Enabling mouse in all modes
 set mousehide "Automatically hide mouse in vim
-"set clipboard=unnamed "Syncing your primary vim register with the system clipboard
+set clipboard+=unnamedplus "Syncing your primary vim register with the system clipboard
 set hls is "When there is a previous search pattern, highlight all its matches.
 set ts=5 "Number of spaces that a <Tab> counts for
 set sts=4 "Number of spaces that a <Tab> counts for while performing editing operations
@@ -40,6 +40,8 @@ set enc=utf-8 "Sets the character encoding used inside Vim
 set rnu "Show the line number relative to the line with the cursor in front of each line
 
 call plug#begin()
+Plug 'junegunn/goyo.vim'
+Plug 'jreybert/vimagit'
 Plug 'ap/vim-css-color'
 call plug#end()
 
@@ -73,7 +75,6 @@ map <leader>sc :!clear && shellcheck -x %<CR>
 " Extensions mappings:
 map <leader>m :Magit<CR>
 map <leader>g :Goyo<CR>
-map <leader>f :Files<CR>
 
 " Spell-check set to F6 and the British English library.
 map <F6> :setlocal spell! spelllang=en_gb<CR>
@@ -82,10 +83,10 @@ map <F6> :setlocal spell! spelllang=en_gb<CR>
 nnoremap S :%s//g<Left><Left>
 
 " Copy selected text to system clipboard (requires gvim/vim-gtk3 installed):
-nnoremap <C-y> "+y
-vnoremap <C-y> "+y
-nnoremap <C-p> "+gP
-vnoremap <C-p> "+gP
+"nnoremap <C-y> "+y
+"vnoremap <C-y> "+y
+"nnoremap <C-p> "+gP
+"vnoremap <C-p> "+gP
 
 " Newtab with ctrl+t
 nnoremap <silent> <C-t> :tabnew<CR>
@@ -100,5 +101,3 @@ autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 
 " Automatically deletes all trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
-
-

@@ -20,6 +20,7 @@ alias \
     n64="mupen64plus" \
     mpv="mpv --save-position-on-quit --no-sub-ass" \
     rm="echo Use the full path i.e. '/bin/rm', consider using trash" \
+    trash="trash --verbose" \
     scrk="screenkey --no-whitespace -s small --bak-mode full -t 1 &" \
     showme="webcam.sh" \
     mpp="mpv --no-video --playlist-shuffle ~/Music" \

@@ -5,12 +5,13 @@ riverctl keyboard-layout en
 riverctl hidecursor timeout 20
 riverctl hidecursor when-typing enabled
 riverctl focus-follows-cursor always
-riverctl xcursor-theme Adwaita
+riverctl xcursor-theme Adwaita 36
 
 # Set tiling and display options
 riverctl default-layout wideriver
 riverctl allow-tearing disabled
-riverctl border-color-focused 0x18857e
+riverctl background-color 0x090604
+riverctl border-color-focused 0xC9372A
 riverctl border-color-unfocused 0x090604
 
 wideriver \
@@ -24,7 +25,7 @@ wideriver \
                   --no-smart-gaps                            \
                   --inner-gaps                   12          \
                   --outer-gaps                   12          \
-                  --border-width                 3           \
+                  --border-width                 4           \
                   --border-width-monocle         0           \
                   --border-width-smart-gaps      0           \
                   --border-color-focused         ""  \

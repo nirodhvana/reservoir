@@ -4,13 +4,13 @@ super + shift + b
 
 # Screenshots
 Print
-     sleep 0.2; \
-     scrot -d3 $HOME/'Pictures/synced/screenshots/%Y-%m-%d-%s_$wx$h.png'; \
-     notify-send --urgency=low --hint=string:x-dunst-stack-tag:scrot 'Screenshot taken' 'Selection'
+     sleep 2 && \
+     scrot -d3 $HOME/'Pictures/synced/screenshots/%Y-%m-%d-%s_$wx$h.png' && \
+     notify-send --urgency=low --hint=string:x-dunst-stack-tag:scrot 'Screenshot taken'
 
 ctrl+Print
-     sleep 0.2; \
-     scrot -s $HOME/'Pictures/synced/screenshots/%Y-%m-%d_%H%M%S-$wx$h.png'; \
+     sleep 2 && \
+     scrot -s $HOME/'Pictures/synced/screenshots/%Y-%m-%d_%H%M%S-$wx$h.png' && \
      notify-send --urgency=low --hint=string:x-dunst-stack-tag:scrot 'Screenshot taken' 'Selection'
 
 # Launch Terminal file manager

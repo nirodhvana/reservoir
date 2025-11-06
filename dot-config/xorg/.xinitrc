@@ -31,7 +31,7 @@ do
 		exit
 	else
          slstatus &
-         feh --bg-max ~/Pictures/wallpaper/current &
+         feh --bg-max ~/pictures/wallpaper/current &
          notify-send "remember to blink, boys" &
          exec dbus-run-session dwm ;
 	fi

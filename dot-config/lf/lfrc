@@ -2,11 +2,12 @@ set shell sh # Interpreter for shell commands
 set icons # Enable icons
 #set drawbox # Enable Borders around columns
 
-# Image Previews using ctpv
+# Image Previews using ctpv fork(https://github.com/cafreo/ctpv)
 set previewer ctpv
 set cleaner ctpvclear
 &ctpv -s $id
 &ctpvquit $id
+set sixel true # needed for wayland
 
 # Move up/down in the parent directory
 map J :updir; down; open

@@ -18,11 +18,11 @@ alias \
     shd="sudo shutdown -h now" \
     mdf="mednafen" \
     n64="mupen64plus" \
-    mpv="mpv --save-position-on-quit --no-sub-ass" \
     rm="echo Use the full path i.e. '/bin/rm', consider using trash" \
     trash="trash --verbose" \
     scrk="screenkey --no-whitespace -s small --bak-mode full -t 1 &" \
     showme="webcam.sh" \
+    mpv="mpv --save-position-on-quit --no-sub-ass" \
     mpp="mpv --no-video --playlist-shuffle ~/Music" \
     mpa="mpv --playlist-shuffle ~/Music" \
     enc="gpg -c --no-symkey-cache --cipher-algo AES256" \

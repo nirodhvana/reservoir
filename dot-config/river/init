@@ -47,6 +47,21 @@ all_tags_mask=$(((1 << 32) - 1))
 riverctl map normal Super       0 set-focused-tags $all_tags_mask
 riverctl map normal Super+Shift 0 set-view-tags    $all_tags_mask
 
+# The scratchpad will live on an unused tag. Which tags are used depends on your
+# config, but rivers default uses the first 9 tags.
+scratch_tag=$((1 << 20 ))
+
+# Toggle the scratchpad with Super+P
+riverctl map normal Super P toggle-focused-tags ${scratch_tag}
+
+# Send windows to the scratchpad with Super+Shift+P
+riverctl map normal Super+Shift P set-view-tags ${scratch_tag}
+
+# Set spawn tagmask to ensure new windows don't have the scratchpad tag unless
+# explicitly set.
+all_but_scratch_tag=$(( ((1 << 32) - 1) ^ $scratch_tag ))
+riverctl spawn-tagmask ${all_but_scratch_tag}
+
 ## Keybindings for the layouts
 # Left, Dwindle
 riverctl map normal Super D send-layout-cmd wideriver "--layout left --stack dwindle --count 1 --ratio 0.5"
@@ -114,7 +129,7 @@ riverctl map normal Super+Shift Q exit
 
 # Keybindings for launching apps
 riverctl map normal Super Return spawn foot
-riverctl map normal Super Semicolon spawn "bemenu-run -l 15 -p "Launch:" --binding vim"
+riverctl map normal Super Semicolon spawn "mew-launcher"
 riverctl map normal Super+Shift F spawn pcmanfm
 riverctl map normal Super+Shift B spawn librewolf
 riverctl map normal Super+Shift G spawn gimp
@@ -128,6 +143,9 @@ riverctl map normal Super+Alt M spawn "footclient -e "mangal""
 riverctl map normal Super+Control P spawn system-config-printer
 riverctl map normal Super+Control S spawn simple-scan
 riverctl map normal Super+Control B spawn blueman-manager
+riverctl map normal None Print spawn "sleep 2 && grim ~/pictures/screenshots/$(date +%Y-%m-%d_%H%M%S).png && notify-send --urgency=low 'Screenshot taken' 'Full Screen'"
+riverctl map normal Control Print spawn "slurp | grim -g - ~/pictures/screenshots/$(date +%Y-%m-%d_%H%M%S).png && notify-send --urgency=low 'Screenshot taken' 'selection'"
+riverctl map normal Super+Shift L spawn "waylock -ignore-empty-password -init-color 0x2e5d66 -input-color 0x6d8d5f -input-alt-color 0xa5995e -fail-color 0xC9372A"
 riverctl map normal Super+Control N spawn "footclient -e "nmtui""
 riverctl map normal Super+Control E spawn "emacsclient -c"
 

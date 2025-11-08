@@ -2,3 +2,6 @@ LICENSE
 README.md
 .git
 .gitignore
+.config/emacs/config.org
+.config/emacs/auto-save-list/
+.config/emacs/eln-cache/

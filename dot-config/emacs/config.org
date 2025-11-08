@@ -1,0 +1,260 @@
+* My Literate Emacs Configuration
+
+** Early Init
+:PROPERTIES:
+:header-args: :tangle early-init.el
+:END:
+
+Some tweaks for faster startup. Most taken from DOOM and modified.
+
+#+begin_src emacs-lisp
+      ;; Temporarily increase GC threshold during startup
+      (setopt inhibit-startup-screen t
+  	  gc-cons-threshold most-positive-fixnum
+            gc-cons-percentage 0.6
+            ;; tweak native compilation settings
+            native-comp-speed 2
+            ;; this tells package.el not to add those pesky customized variable settings at the end of your init.el
+            package--init-file-ensured t
+            ;; Emacs resizes the (GUI) frame when your newly set font is larger (or smaller) than the system default. This seems to add 0.4-1s to startup. 
+            ;; frame-inhibit-implied-resize t
+            ;; Prevent auto package-initialize as it would make package-quickstart redundant. 
+            package-enable-at-startup nil
+            ;; Precompute package activation actions to speed up startup.
+            package-quickstart t 
+            ;; A large config may make the *Messages* buffer lose some information.
+            message-log-max t)
+
+      ;; Restore to normal value after startup (e.g. 50MB)
+      (add-hook 'emacs-startup-hook
+                (lambda () (setopt gc-cons-threshold (* 50 1024 1024))))
+#+end_src
+  
+Disabling unnecessary toolbars, menus, and other visual elements for faster startup.
+
+#+begin_src emacs-lisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+#+end_src
+
+Enabling Relative Line Numbers EVERYWHERE cuz they're cool.
+
+#+begin_src emacs-lisp
+  (setopt display-line-numbers-type 'relative)
+  (global-display-line-numbers-mode +1)
+#+end_src
+
+Set up the use-package macro that we will use for package configuration later.
+
+#+begin_src emacs-lisp
+  (require 'package)
+
+  ;; Add Milkypostman’s Emacs Lisp Package Archive
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))   
+  (package-initialize) 
+
+  (unless package-archive-contents
+    (package-refresh-contents))
+
+  (require 'use-package)
+  (setopt use-package-always-ensure t ;; Always :ensure t (install and enable package) when using the macro
+        use-package-verbose t) ;; Package install logging. Packages break, it's nice to know why.
+#+end_src
+
+This slurps up environment variables from the shell. Which is apparently the Most Asked Question On r/emacs.
+
+#+begin_src emacs-lisp
+  (use-package exec-path-from-shell
+    :config
+    (exec-path-from-shell-initialize))
+#+end_src
+
+A better keyboard-quit by [[https://emacsredux.com/blog/2025/06/01/let-s-make-keyboard-quit-smarter/][EmacsRedux]] and you know why. If you dont:
+
+#+begin_quote
+'My emacs has no minibuffer-keyboard-quit , should I go shoot myself? emacs-version is ”30.1”' - someguy in the comments IhaveanoDoxpolicy
+#+end_quote
+
+Presenting:
+  "Smater version of the built-in `keyboard-quit'.
+
+The generic `keyboard-quit' does not do the expected thing when
+the minibuffer is open.  Whereas we want it to close the
+minibuffer, even without explicitly focusing it."
+
+#+begin_src emacs-lisp
+(defun er-keyboard-quit ()
+  (interactive)
+  (if (active-minibuffer-window)
+      (if (minibufferp)
+          (minibuffer-keyboard-quit)
+        (abort-recursive-edit))
+    (keyboard-quit)))
+#+end_src
+
+I just remap keyboard-quit to our improved version:
+
+#+begin_src emacs-lisp
+  (global-set-key [remap keyboard-quit] #'er-keyboard-quit)
+#+end_src
+
+I want emacs backup files(confidence kills. backup or packup) but not in the same place as the original. Multiple copies and version control can also be handy.
+
+#+begin_src emacs-lisp
+  (setopt backup-directory-alist `(("." . "~/.emacsbackups"))
+        make-backup-files t ; backup of a file the first time it is saved.
+        backup-by-copying t ; don't clobber symlinks
+        version-control t ; version numbers for backup files
+        delete-old-versions t
+        delete-by-moving-to-trash t
+        kept-new-versions 5 ; newest versions to keep when a new numbered backup is made (default: 2)
+        kept-old-versions 3 ; oldest versions to keep when a new numbered backup is made (default: 2)
+        auto-save-default t ; auto-save every buffer that visits a file
+        )
+#+end_src
+
+#+begin_src emacs-lisp
+#+end_src
+
+** Init
+:PROPERTIES:
+:header-args: :tangle init.el
+:END:
+
+*** Aesthetics
+
+Load Modus-Vivendi cuz it is a cool theme.
+
+  (load-theme 'modus-vivendi-tritanopia t)
+#+begin_src emacs-lisp
+  (load-theme 'modus-vivendi t)
+#+end_src
+
+I set emacs to use a nice default font. I like Iosevka. This way is apparently faster according to DOOM's maintainer cuz it loads less stuff. I have problems with the daemon while using set-frame-font so I just do this.
+
+I also have a nice alpha background.
+
+#+begin_src emacs-lisp
+  (add-to-list 'default-frame-alist '(font . "Iosevka 23"))
+  (set-frame-parameter nil 'alpha-background 85)
+  (add-to-list 'default-frame-alist '(alpha-background . 85))
+#+end_src
+
+*** Navigation and completion
+
+Vertico provides nice minibuffer suggestions of files, directories and functions.
+
+#+begin_src emacs-lisp
+  (use-package vertico
+    :init (vertico-mode))
+#+end_src
+
+Orderless gives you better completion to make it easier to find anything and everything.
+
+#+begin_src emacs-lisp 
+  (use-package orderless
+    :custom
+    (completion-styles '(orderless basic))
+    (completion-category-overrides '((file (styles basic partial-completion)))))
+#+end_src
+
+*** Evil Mode
+
+Let's enable vim bindings cuz why not. Make sure to set `evil-want-keybinding' to nil before loading evil or evil-collection. See why [[https://github.com/emacs-evil/evil-collection/issues/60][here]] for more details.
+
+#+begin_src emacs-lisp
+  (use-package evil
+    :init
+    (setopt evil-want-keybinding nil)
+    :config
+    (evil-mode 1))
+#+end_src
+
+This package contains preset vim bindings for everywhere else too.
+
+#+begin_src emacs-lisp
+  (use-package evil-collection
+    :after evil
+    :config
+    (setopt evil-want-integration t)
+    (evil-collection-init))
+#+end_src
+
+*** Org Mode
+
+I have some setup and aesthetic tweaks to make org work(look;) nicer
+
+#+begin_src emacs-lisp
+  (use-package org
+    :init
+    (setopt org-return-follows-link t ;; Follow the links
+  	org-hide-emphasis-markers t ;; Hide the markers so you just see BOLD-TEXT and not *BOLD-TEXT*
+  	org-agenda-files '("~/org") ;; Must do this so the agenda knows where to look for my files
+  	org-log-done 'time) ;; When a TODO is set to a done state, record a timestamp
+
+    :hook (
+           (org-mode . org-indent-mode) ;; Make the indentation look nicer
+           (org-mode . visual-line-mode) ;; Wrap the lines in org mode so that things are easier to read
+  	 )
+    
+    ;; Associate all org files with org mode
+    :mode ("\\.org\\'" . org-mode)
+
+    :bind (
+  	 ;; Shortcuts for storing links, viewing the agenda, and starting a capture
+  	 ("\C-cl" . org-store-link)
+           ("\C-ca" . org-agenda)
+           ("\C-cc" . org-capture)
+    	 (:map org-mode-map
+  	       ;; Remap the change priority keys to use the UP or DOWN key
+                 ("C-c <up>" . org-priority-up)
+                 ("C-c <down>" . org-priority-down)
+  	       ;; When you want to change the level of an org item, use SMR
+                 ("C-c C-g C-r" . org-shiftmetaright)
+  	       )
+  	 )
+
+    ;; AESTHETICS
+    :config
+    (when (display-graphic-p)
+      (let* ((variable-tuple
+              (cond ((x-list-fonts "Iosevka")         '(:font "Iosevka"))
+                    ((x-family-fonts "Iosevka")       '(:family "Iosevka"))
+                    (nil (warn "Cannot find a Iosevka Font. Install Iosevka."))))
+             (headline           `(:inherit default :weight bold)))
+
+        ;; Set different heights for different levels in org mode
+        (custom-theme-set-faces
+         'user
+         `(org-level-8 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
+         `(org-level-7 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
+         `(org-level-6 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
+         `(org-level-5 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
+         `(org-level-4 ((t (,@headline ,@variable-tuple :foreground, "#1DA3C0" :height 1.1))))
+         `(org-level-3 ((t (,@headline ,@variable-tuple :foreground, "#18857e" :height 1.25))))
+         `(org-level-2 ((t (,@headline ,@variable-tuple :foreground, "#c9372a" :height 1.5))))
+         `(org-level-1 ((t (,@headline ,@variable-tuple :foreground, "#920727" :height 1.75))))
+         `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
+      )
+    )
+#+end_src
+
+*** Magit : It's Magit bro
+
+#+begin_src emacs-lisp
+  ;; (use-package magit)
+#+end_src
+
+*** LaTeX
+
+Change the org-mode LaTeX export compiler to LuaLaTeX.
+
+#+begin_src emacs-lisp
+  (setopt org-latex-compiler "lualatex")
+#+end_src
+
+*** EMAIL
+
+#+begin_src emacs-lisp
+#+end_src

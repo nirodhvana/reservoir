@@ -1,0 +1,14 @@
+#!/bin/sh
+# Inspired by https://github.com/swindlesmccoop/not-just-dotfiles/blob/master/.local/bin/swallow
+swallow_tag=$((1 << 9))
+eat () {
+    riverctl set-view-tags $swallow_tag
+}
+
+throwup () {
+    riverctl set-focused-tags $swallow_tag &&
+    riverctl send-to-previous-tags &&
+    riverctl focus-previous-tags
+}
+
+[ -z "$@" ] && printf "ERROR: No Arguments Supplied\n" || eat && "$@" ; throwup

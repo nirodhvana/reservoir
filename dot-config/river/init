@@ -5,13 +5,13 @@ riverctl keyboard-layout en
 riverctl hidecursor timeout 20
 riverctl hidecursor when-typing enabled
 riverctl focus-follows-cursor always
-riverctl xcursor-theme Adwaita 36
+riverctl xcursor-theme Adwaita 24
 
 # Set tiling and display options
 riverctl default-layout wideriver
 riverctl allow-tearing disabled
 riverctl background-color 0x090604
-riverctl border-color-focused 0xC9372A
+riverctl border-color-focused 0x005577
 riverctl border-color-unfocused 0x090604
 
 wideriver \
@@ -25,7 +25,7 @@ wideriver \
                   --no-smart-gaps                            \
                   --inner-gaps                   12          \
                   --outer-gaps                   12          \
-                  --border-width                 4           \
+                  --border-width                 2           \
                   --border-width-monocle         0           \
                   --border-width-smart-gaps      0           \
                   --border-color-focused         ""  \
@@ -52,10 +52,10 @@ riverctl map normal Super+Shift 0 set-view-tags    $all_tags_mask
 scratch_tag=$((1 << 20 ))
 
 # Toggle the scratchpad with Super+P
-riverctl map normal Super P toggle-focused-tags ${scratch_tag}
+riverctl map normal Super S toggle-focused-tags ${scratch_tag}
 
 # Send windows to the scratchpad with Super+Shift+P
-riverctl map normal Super+Shift P set-view-tags ${scratch_tag}
+riverctl map normal Super+Shift S set-view-tags ${scratch_tag}
 
 # Set spawn tagmask to ensure new windows don't have the scratchpad tag unless
 # explicitly set.
@@ -142,12 +142,17 @@ riverctl map normal Super+Alt A spawn "footclient -e "ani-cli""
 riverctl map normal Super+Alt M spawn "footclient -e "mangal""
 riverctl map normal Super+Control P spawn system-config-printer
 riverctl map normal Super+Control S spawn simple-scan
-riverctl map normal Super+Control B spawn blueman-manager
+riverctl map normal Super+Control B spawn "footclient -e bluetuith"
 riverctl map normal None Print spawn "sleep 2 && grim ~/pictures/screenshots/$(date +%Y-%m-%d_%H%M%S).png && notify-send --urgency=low 'Screenshot taken' 'Full Screen'"
 riverctl map normal Control Print spawn "slurp | grim -g - ~/pictures/screenshots/$(date +%Y-%m-%d_%H%M%S).png && notify-send --urgency=low 'Screenshot taken' 'selection'"
 riverctl map normal Super+Shift L spawn "waylock -ignore-empty-password -init-color 0x2e5d66 -input-color 0x6d8d5f -input-alt-color 0xa5995e -fail-color 0xC9372A"
 riverctl map normal Super+Control N spawn "footclient -e "nmtui""
 riverctl map normal Super+Control E spawn "emacsclient -c"
+
+#Volume Control (reminder: sink is output not source)
+riverctl map normal Super+Control P spawn "footclient -e pipemixer"
+riverctl map normal Super plus spawn "wpctl set-volume @DEFAULT_SINK@ 5+"
+riverctl map normal Super minus spawn "wpctl set-volume @DEFAULT_SINK@ 5-"
 
 # Enable Server Side Decoration to prevent gui border glitches.
 riverctl rule-add ssd
@@ -157,5 +162,5 @@ riverctl rule-add -app-id gimp float
 riverctl rule-add -app-id gimp dimensions 800 500
 riverctl rule-add -app-id gimp position 500 400
 
-bash $HOME/.local/bin/waystarter.sh
+bash $HOME/.local/bin/waystarter.sh &
 slstatus -s | dam

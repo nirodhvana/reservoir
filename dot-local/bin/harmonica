@@ -7,4 +7,4 @@ mpv --geometry=200x200+1600+800 \
 	--player-operation-mode=pseudo-gui \
 	--no-terminal \
 	"$@" \
-	-- $HOME/Music/
+	-- $HOME/music/

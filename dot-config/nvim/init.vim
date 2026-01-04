@@ -5,7 +5,7 @@ let &t_TI = "\<Esc>[>4;2m"
 let &t_TE = "\<Esc>[>4m"
 
 " Colorscheme
-colo torte
+colo retrobox
 
 " Transparency
 highlight Normal guibg=none
@@ -30,7 +30,14 @@ set fileformat=unix
 set showcmd "Show (partial) command in the last line of the screen
 set wrap "Enables line wrapping, default break at character
 set timeoutlen=500 ttimeoutlen=15 "Mitigating delay when pressing esc
-set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L] laststatus=2
+set statusline=%t%m%r%h%w%=\ %Y\ %l,%v\ %p%%\ [%L] laststatus=1
+
+call plug#begin()
+Plug 'junegunn/goyo.vim'
+Plug 'jreybert/vimagit'
+Plug 'LukeSmithxyz/vimling'
+Plug 'ap/vim-css-color'
+call plug#end()
 
 " Some basics:
 nnoremap c "_c
@@ -38,12 +45,6 @@ set nocp "Making Vim behave in a more useful way than vi
 syntax on
 set enc=utf-8 "Sets the character encoding used inside Vim
 set rnu "Show the line number relative to the line with the cursor in front of each line
-
-call plug#begin()
-Plug 'junegunn/goyo.vim'
-Plug 'jreybert/vimagit'
-Plug 'ap/vim-css-color'
-call plug#end()
 
 " Built-in Fuzzy-finder
 set wildmenu path+=**

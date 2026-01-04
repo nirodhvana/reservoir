@@ -3,11 +3,12 @@ set icons # Enable icons
 #set drawbox # Enable Borders around columns
 
 # Image Previews using ctpv fork(https://github.com/cafreo/ctpv)
+set preload false
 set previewer ctpv
 set cleaner ctpvclear
 &ctpv -s $id
 &ctpvquit $id
-set sixel true # needed for wayland
+#set sixel true # needed for wayland(produces error. turning off for now)
 
 # Move up/down in the parent directory
 map J :updir; down; open

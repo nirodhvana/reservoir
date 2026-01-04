@@ -6,12 +6,12 @@
       native-comp-speed 2
       ;; this tells package.el not to add those pesky customized variable settings at the end of your init.el
       package--init-file-ensured t
-      ;; Emacs resizes the (GUI) frame when your newly set font is larger (or smaller) than the system default. This seems to add 0.4-1s to startup. 
+      ;; Emacs resizes the (GUI) frame when your newly set font is larger (or smaller) than the system default. This seems to add 0.4-1s to startup.
       ;; frame-inhibit-implied-resize t
-      ;; Prevent auto package-initialize as it would make package-quickstart redundant. 
+      ;; Prevent auto package-initialize as it would make package-quickstart redundant.
       package-enable-at-startup nil
       ;; Precompute package activation actions to speed up startup.
-      package-quickstart t 
+      package-quickstart t
       ;; A large config may make the *Messages* buffer lose some information.
       message-log-max t)
 
@@ -29,8 +29,8 @@
 (require 'package)
 
 ;; Add Milkypostman’s Emacs Lisp Package Archive
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))   
-(package-initialize) 
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
 
 (unless package-archive-contents
   (package-refresh-contents))

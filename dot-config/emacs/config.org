@@ -16,12 +16,12 @@ Some tweaks for faster startup. Most taken from DOOM and modified.
             native-comp-speed 2
             ;; this tells package.el not to add those pesky customized variable settings at the end of your init.el
             package--init-file-ensured t
-            ;; Emacs resizes the (GUI) frame when your newly set font is larger (or smaller) than the system default. This seems to add 0.4-1s to startup. 
+            ;; Emacs resizes the (GUI) frame when your newly set font is larger (or smaller) than the system default. This seems to add 0.4-1s to startup.
             ;; frame-inhibit-implied-resize t
-            ;; Prevent auto package-initialize as it would make package-quickstart redundant. 
+            ;; Prevent auto package-initialize as it would make package-quickstart redundant.
             package-enable-at-startup nil
             ;; Precompute package activation actions to speed up startup.
-            package-quickstart t 
+            package-quickstart t
             ;; A large config may make the *Messages* buffer lose some information.
             message-log-max t)
 
@@ -29,7 +29,7 @@ Some tweaks for faster startup. Most taken from DOOM and modified.
       (add-hook 'emacs-startup-hook
                 (lambda () (setopt gc-cons-threshold (* 50 1024 1024))))
 #+end_src
-  
+
 Disabling unnecessary toolbars, menus, and other visual elements for faster startup.
 
 #+begin_src emacs-lisp
@@ -51,8 +51,8 @@ Set up the use-package macro that we will use for package configuration later.
   (require 'package)
 
   ;; Add Milkypostman’s Emacs Lisp Package Archive
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))   
-  (package-initialize) 
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+  (package-initialize)
 
   (unless package-archive-contents
     (package-refresh-contents))
@@ -136,7 +136,7 @@ I set emacs to use a nice default font. I like Iosevka. This way is apparently f
 I also have a nice alpha background.
 
 #+begin_src emacs-lisp
-  (add-to-list 'default-frame-alist '(font . "Iosevka 23"))
+  (add-to-list 'default-frame-alist '(font . "GohuFont uni11 NerdFont Propo 10" ))
   (set-frame-parameter nil 'alpha-background 85)
   (add-to-list 'default-frame-alist '(alpha-background . 85))
 #+end_src
@@ -152,7 +152,7 @@ Vertico provides nice minibuffer suggestions of files, directories and functions
 
 Orderless gives you better completion to make it easier to find anything and everything.
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (use-package orderless
     :custom
     (completion-styles '(orderless basic))
@@ -189,15 +189,15 @@ I have some setup and aesthetic tweaks to make org work(look;) nicer
   (use-package org
     :init
     (setopt org-return-follows-link t ;; Follow the links
-  	org-hide-emphasis-markers t ;; Hide the markers so you just see BOLD-TEXT and not *BOLD-TEXT*
-  	org-agenda-files '("~/org") ;; Must do this so the agenda knows where to look for my files
-  	org-log-done 'time) ;; When a TODO is set to a done state, record a timestamp
+  	  org-hide-emphasis-markers t ;; Hide the markers so you just see BOLD-TEXT and not *BOLD-TEXT*
+  	  org-agenda-files '("~/org") ;; Must do this so the agenda knows where to look for my files
+  	  org-log-done 'time) ;; When a TODO is set to a done state, record a timestamp
 
     :hook (
            (org-mode . org-indent-mode) ;; Make the indentation look nicer
            (org-mode . visual-line-mode) ;; Wrap the lines in org mode so that things are easier to read
   	 )
-    
+
     ;; Associate all org files with org mode
     :mode ("\\.org\\'" . org-mode)
 
@@ -215,35 +215,42 @@ I have some setup and aesthetic tweaks to make org work(look;) nicer
   	       )
   	 )
 
-    ;; AESTHETICS
-    :config
-    (when (display-graphic-p)
-      (let* ((variable-tuple
-              (cond ((x-list-fonts "Iosevka")         '(:font "Iosevka"))
-                    ((x-family-fonts "Iosevka")       '(:family "Iosevka"))
-                    (nil (warn "Cannot find a Iosevka Font. Install Iosevka."))))
-             (headline           `(:inherit default :weight bold)))
+    :custom (org-export-backends '(ascii html icalendar latex beamer md man odt texinfo))
 
-        ;; Set different heights for different levels in org mode
-        (custom-theme-set-faces
-         'user
-         `(org-level-8 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
-         `(org-level-7 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
-         `(org-level-6 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
-         `(org-level-5 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
-         `(org-level-4 ((t (,@headline ,@variable-tuple :foreground, "#1DA3C0" :height 1.1))))
-         `(org-level-3 ((t (,@headline ,@variable-tuple :foreground, "#18857e" :height 1.25))))
-         `(org-level-2 ((t (,@headline ,@variable-tuple :foreground, "#c9372a" :height 1.5))))
-         `(org-level-1 ((t (,@headline ,@variable-tuple :foreground, "#920727" :height 1.75))))
-         `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
-      )
+  ;; AESTHETICS
+  :config
+  (when (display-graphic-p)
+    (let* ((variable-tuple
+            (cond ((x-list-fonts "Iosevka")         '(:font "Iosevka"))
+                  ((x-family-fonts "Iosevka")       '(:family "Iosevka"))
+                  (nil (warn "Cannot find a Iosevka Font. Install Iosevka."))))
+           (headline           `(:inherit default :weight bold)))
+
+      ;; Set different heights for different levels in org mode
+      (custom-theme-set-faces
+       'user
+       `(org-level-8 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
+       `(org-level-7 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
+       `(org-level-6 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
+       `(org-level-5 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
+       `(org-level-4 ((t (,@headline ,@variable-tuple :foreground, "#1DA3C0" :height 1.1))))
+       `(org-level-3 ((t (,@headline ,@variable-tuple :foreground, "#18857e" :height 1.25))))
+       `(org-level-2 ((t (,@headline ,@variable-tuple :foreground, "#c9372a" :height 1.5))))
+       `(org-level-1 ((t (,@headline ,@variable-tuple :foreground, "#920727" :height 1.75))))
+       `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
     )
+  )
+#+end_src
+
+*** Org Roam
+
+#+begin_src emacs-lisp
 #+end_src
 
 *** Magit : It's Magit bro
 
 #+begin_src emacs-lisp
-  ;; (use-package magit)
+  (use-package magit)
 #+end_src
 
 *** LaTeX

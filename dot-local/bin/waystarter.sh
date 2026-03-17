@@ -6,7 +6,7 @@ for program in $autostart; do
 done >/dev/null 2>&1
 
 wpctl set-volume @DEFAULT_AUDIO_SINK@ 50 &
-gammastep -O 2500 &
+gammastep -O 3500 &
 emacs --daemon &
 foot --server &
 swaybg -m fit -i ~/pictures/wallpaper/current &

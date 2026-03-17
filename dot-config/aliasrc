@@ -23,8 +23,8 @@ alias \
     scrk="screenkey --no-whitespace -s small --bak-mode full -t 1 &" \
     showme="webcam.sh" \
     mpv="mpv --save-position-on-quit --no-sub-ass" \
-    mpp="mpv --no-video --playlist-shuffle ~/Music" \
-    mpa="mpv --playlist-shuffle ~/Music" \
+    mpp="mpv --no-video --playlist-shuffle $HOME/music" \
+    mpa="mpv --playlist-shuffle $HOME/music" \
     enc="gpg -c --no-symkey-cache --cipher-algo AES256" \
     ytv="yt-dlp -i" \
     yta="yt-dlp -x -f bestaudio[ext=opus]/best[ext=opus]" \

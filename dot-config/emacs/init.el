@@ -1,4 +1,4 @@
-(load-theme 'modus-vivendi t)
+(load-theme 'modus-vivendi-tritanopia t)
 
 (add-to-list 'default-frame-alist '(font . "GohuFont uni11 NerdFont Propo 10" ))
 (set-frame-parameter nil 'alpha-background 85)

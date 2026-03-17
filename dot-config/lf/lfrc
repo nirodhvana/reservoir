@@ -10,6 +10,9 @@ set cleaner ctpvclear
 &ctpvquit $id
 #set sixel true # needed for wayland(produces error. turning off for now)
 
+# Custom keybinds
+#cmd
+
 # Move up/down in the parent directory
 map J :updir; down; open
 map K :updir; up; open

@@ -128,7 +128,7 @@ Load Modus-Vivendi cuz it is a cool theme.
 
   (load-theme 'modus-vivendi-tritanopia t)
 #+begin_src emacs-lisp
-  (load-theme 'modus-vivendi t)
+  (load-theme 'modus-vivendi-tritanopia t)
 #+end_src
 
 I set emacs to use a nice default font. I like Iosevka. This way is apparently faster according to DOOM's maintainer cuz it loads less stuff. I have problems with the daemon while using set-frame-font so I just do this.

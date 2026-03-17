@@ -128,7 +128,7 @@ riverctl map normal Super X close
 riverctl map normal Super+Shift Q exit
 
 # Keybindings for launching apps
-riverctl map normal Super Return spawn foot
+riverctl map normal Super Return spawn footclient
 riverctl map normal Super Semicolon spawn "mew-launcher"
 riverctl map normal Super+Shift F spawn pcmanfm
 riverctl map normal Super+Shift B spawn librewolf
@@ -153,6 +153,10 @@ riverctl map normal Super+Control E spawn "emacsclient -c"
 riverctl map normal Super+Control P spawn "footclient -e pipemixer"
 riverctl map normal Super plus spawn "wpctl set-volume @DEFAULT_SINK@ 5+"
 riverctl map normal Super minus spawn "wpctl set-volume @DEFAULT_SINK@ 5-"
+
+#control mpv vol with bluetooth headphone buttons
+#riverctl map normal KEY_VOLUMEUP spawn "playerctl volume +0.05"
+#riverctl map normal KEY_VOLUMEDOWN spawn "playerctl volume -0.05"
 
 # Enable Server Side Decoration to prevent gui border glitches.
 riverctl rule-add ssd

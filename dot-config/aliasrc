@@ -6,6 +6,7 @@ alias \
     sudo="doas" \
     stow="stow --dotfiles" \
     stowsync="stowsync.sh" \
+    neofetch="fastfetch" \
     cp="cp -iv" \
     mv="mv -iv" \
     rm="rm -v" \

@@ -11,7 +11,8 @@ riverctl xcursor-theme Adwaita 24
 riverctl default-layout wideriver
 riverctl allow-tearing disabled
 riverctl background-color 0x090604
-riverctl border-color-focused 0x005577
+#riverctl border-color-focused 0x005577
+riverctl border-color-focused 0x18857e
 riverctl border-color-unfocused 0x090604
 
 wideriver \
@@ -109,11 +110,17 @@ riverctl map normal Super L send-layout-cmd wideriver "--ratio +0.05"
 riverctl map normal Super+Shift H send-layout-cmd wideriver "--count +1"
 riverctl map normal Super+Shift L send-layout-cmd wideriver "--count -1"
 
-# Super+Alt+{H,J,K,L} to move views
-riverctl map normal Super+Alt H move left 100
-riverctl map normal Super+Alt J move down 100
-riverctl map normal Super+Alt K move up 100
-riverctl map normal Super+Alt L move right 100
+# Super+Control+{H,J,K,L} to move views
+riverctl map normal Super+Control H move left 100
+riverctl map normal Super+Control J move down 100
+riverctl map normal Super+Control K move up 100
+riverctl map normal Super+Control L move right 100
+
+# Super+Alt+{H,J,K,L} to resize views
+riverctl map normal Super+Alt H resize horizontal -100
+riverctl map normal Super+Alt J resize vertical -100
+riverctl map normal Super+Alt K resize vertical 100
+riverctl map normal Super+Alt L resize horizontal 100
 
 # Super+Alt+Control+{H,J,K,L} to snap views to screen edges
 riverctl map normal Super+Alt+Control H snap left
@@ -143,11 +150,14 @@ riverctl map normal Super+Alt M spawn "footclient -e "mangal""
 riverctl map normal Super+Control P spawn system-config-printer
 riverctl map normal Super+Control S spawn simple-scan
 riverctl map normal Super+Control B spawn "footclient -e bluetuith"
-riverctl map normal None Print spawn "sleep 2 && grim ~/pictures/screenshots/$(date +%Y-%m-%d_%H%M%S).png && notify-send --urgency=low 'Screenshot taken' 'Full Screen'"
-riverctl map normal Control Print spawn "slurp | grim -g - ~/pictures/screenshots/$(date +%Y-%m-%d_%H%M%S).png && notify-send --urgency=low 'Screenshot taken' 'selection'"
+riverctl map normal None Print spawn "sleep 2 && grim ~/synced/screenshots/$(date +%Y-%m-%d_%H%M%S).png && notify-send --urgency=low 'Screenshot taken' 'Full Screen'"
+riverctl map normal Control Print spawn "slurp | grim -g - ~/synced/screenshots/$(date +%Y-%m-%d_%H%M%S).png && notify-send --urgency=low 'Screenshot taken' 'selection'"
 riverctl map normal Super+Shift L spawn "waylock -ignore-empty-password -init-color 0x2e5d66 -input-color 0x6d8d5f -input-alt-color 0xa5995e -fail-color 0xC9372A"
 riverctl map normal Super+Control N spawn "footclient -e "nmtui""
 riverctl map normal Super+Control E spawn "emacsclient -c"
+
+# Keybind to check local weather stats
+#riverctl map normal Super+Control W spawn "footclient -e "$HOME/.local/bin/wttrstat""
 
 #Volume Control (reminder: sink is output not source)
 riverctl map normal Super+Control P spawn "footclient -e pipemixer"

@@ -5,7 +5,7 @@ for program in $autostart; do
 	pidof -sx "$program" || "$program" &
 done >/dev/null 2>&1
 
-wpctl set-volume @DEFAULT_AUDIO_SINK@ 50 &
+wpctl set-volume @DEFAULT_AUDIO_SINK@ 20 &
 gammastep -O 3500 &
 emacs --daemon &
 foot --server &

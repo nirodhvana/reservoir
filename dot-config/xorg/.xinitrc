@@ -19,7 +19,7 @@ autostart &
 xrandr --output HDMI1 --set audio force-dvi --mode 1920x1080 &
 
 emacs --daemon &
-wpctl set-volume @DEFAULT_AUDIO_SINK@ 50 &
+wpctl set-volume @DEFAULT_AUDIO_SINK@ 20 &
 
 dbus-launch ssh-agent &
 

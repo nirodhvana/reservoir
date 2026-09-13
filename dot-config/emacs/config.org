@@ -5,29 +5,86 @@
 :header-args: :tangle early-init.el
 :END:
 
-Some tweaks for faster startup. Most taken from DOOM and modified.
+*** Tweaks and Tricks
+
+Some tweaks for faster startup and some stolen tricks. Most taken from DOOM and modified.
 
 #+begin_src emacs-lisp
-      ;; Temporarily increase GC threshold during startup
-      (setopt inhibit-startup-screen t
-  	  gc-cons-threshold most-positive-fixnum
-            gc-cons-percentage 0.6
-            ;; tweak native compilation settings
-            native-comp-speed 2
-            ;; this tells package.el not to add those pesky customized variable settings at the end of your init.el
-            package--init-file-ensured t
-            ;; Emacs resizes the (GUI) frame when your newly set font is larger (or smaller) than the system default. This seems to add 0.4-1s to startup.
-            ;; frame-inhibit-implied-resize t
-            ;; Prevent auto package-initialize as it would make package-quickstart redundant.
-            package-enable-at-startup nil
-            ;; Precompute package activation actions to speed up startup.
-            package-quickstart t
-            ;; A large config may make the *Messages* buffer lose some information.
-            message-log-max t)
+  ;; Temporarily increase GC threshold during startup
+  (setopt inhibit-startup-screen t
+          gc-cons-threshold most-positive-fixnum
+          gc-cons-percentage 0.6
 
-      ;; Restore to normal value after startup (e.g. 50MB)
-      (add-hook 'emacs-startup-hook
-                (lambda () (setopt gc-cons-threshold (* 50 1024 1024))))
+          ;; tweak native compilation settings
+          native-comp-speed 2
+
+  	;; To reduce the risk of loading outdated byte-code files, you should set load-prefer-newer and enable auto-compile-on-load-mode as early as possible, in early-init.el
+  	load-prefer-newer t
+
+          ;; this tells package.el not to add those pesky customized variable settings at the end of your init.el
+          package--init-file-ensured t
+
+          ;; Emacs resizes the (GUI) frame when your newly set font is larger (or smaller) than the system default. This seems to add 0.4-1s to startup.
+          ;; frame-inhibit-implied-resize t
+
+          ;; Prevent auto package-initialize as it would make package-quickstart redundant.
+          package-enable-at-startup nil
+
+          ;; Precompute package activation actions to speed up startup.
+          package-quickstart t
+
+          ;; A large config may make the *Messages* buffer lose some information.
+          message-log-max t
+
+          ;; Disable Bidirectional Text Scanning (Doom Emacs)
+          bidi-display-reordering 'left-to-right
+          bidi-paragraph-direction 'left-to-right
+          bidi-inhibit-bpa t
+
+          ;; Increase Process Output Buffer for LSP (Doom, Purcell, Centaur)
+          read-process-output-max (* 4 1024 1024) ; 4MB
+
+          ;; Save the Clipboard Before Killing (Purcell, Prot, Centaur)
+          save-interprogram-paste-before-kill t
+
+          ;; No Duplicates in the Kill Ring (Doom, Prot)
+          kill-do-not-save-duplicates t
+
+          ;; Sane Syntax in re-builder  
+  	reb-re-syntax 'string
+
+          ;; Persist the Kill Ring Across Sessions (Doom, Prot) 
+          savehist-additional-variables
+          '(search-ring regexp-search-ring kill-ring)
+
+      	;; Proportional Window Resizing (Purcell, Prot)
+  	window-combination-resize t
+
+    	;; Faster Mark Popping
+      	;; The annoyance: you need C-u C-SPC every single time. With this setting, after the first C-u C-SPC you can keep pressing just C-SPC to continue popping:
+  	set-mark-command-repeat-pop t
+
+  	;; Auto-Select Help Windows (Prot)
+  	help-window-select t
+
+  	;; prevent dired from deleting a file irrecoverably using trash
+  	delete-by-moving-to-trash t)
+      	)
+
+  ;; The kill ring can accumulate text properties (fonts, overlays, etc.) that bloat the savehist file. Doom strips them before saving
+  (add-hook 'savehist-save-hook
+            (lambda ()
+              (setopt kill-ring
+                    (mapcar #'substring-no-properties
+                            (cl-remove-if-not #'stringp kill-ring)))))
+
+  ;; Restore to normal value after startup (e.g. 50MB)
+  (add-hook 'emacs-startup-hook
+            (lambda () (setopt gc-cons-threshold (* 50 1024 1024))))
+
+  ;; Auto-Chmod Scripts on Save
+  (add-hook 'after-save-hook
+            #'executable-make-buffer-file-executable-if-script-p)
 #+end_src
 
 Disabling unnecessary toolbars, menus, and other visual elements for faster startup.
@@ -36,6 +93,11 @@ Disabling unnecessary toolbars, menus, and other visual elements for faster star
   (menu-bar-mode -1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
+#+end_src
+
+Custom modeline features
+#+begin_src emacs-lisp
+  (column-number-mode)
 #+end_src
 
 Enabling Relative Line Numbers EVERYWHERE cuz they're cool.
@@ -59,7 +121,22 @@ Set up the use-package macro that we will use for package configuration later.
 
   (require 'use-package)
   (setopt use-package-always-ensure t ;; Always :ensure t (install and enable package) when using the macro
-        use-package-verbose t) ;; Package install logging. Packages break, it's nice to know why.
+  	use-package-verbose t) ;; Package install logging. Packages break, it's nice to know why.
+#+end_src
+
+Byte compilation using auto-compile
+
+#+begin_src emacs-lisp
+     ;;; early-init.el -*- no-byte-compile: t -*-
+  (use-package auto-compile
+    :demand t
+    :config
+    (auto-compile-on-load-mode)
+    (auto-compile-on-save-mode)
+    :custom
+    (auto-compile-display-buffer nil)
+    (auto-compile-mode-line-counter t)
+    )
 #+end_src
 
 This slurps up environment variables from the shell. Which is apparently the Most Asked Question On r/emacs.
@@ -70,51 +147,81 @@ This slurps up environment variables from the shell. Which is apparently the Mos
     (exec-path-from-shell-initialize))
 #+end_src
 
-A better keyboard-quit by [[https://emacsredux.com/blog/2025/06/01/let-s-make-keyboard-quit-smarter/][EmacsRedux]] and you know why. If you dont:
+Implementing Reversible C-x 1 (Purcell)
+
+C-x 1 (delete-other-windows) is the nuclear option – it nukes your entire window layout to focus on one buffer. Then you spend the next minute recreating the layout you just destroyed.
+
+With winner-mode and a small wrapper, you can make C-x 1 toggle: press it once to go single-window, press it again to restore the previous layout:
+
+#+begin_src emacs-lisp
+  (winner-mode +1)
+
+  (defun toggle-delete-other-windows ()
+    "Delete other windows in frame if any, or restore previous window config."
+    (interactive)
+    (if (and winner-mode
+             (equal (selected-window) (next-window)))
+        (winner-undo)
+      (delete-other-windows)))
+
+  (global-set-key (kbd "C-x 1") #'toggle-delete-other-windows)
+#+end_src
+
+Recenter After save-place Restores Position (Doom Emacs)
+
+save-place-mode is great – it remembers where you were in each file and jumps back there when you reopen it. The problem is that it can leave your cursor on the last visible line of the window, which is disorienting. This advice recenters the view after the jump:
+
+#+begin_src emacs-lisp 
+  (advice-add 'save-place-find-file-hook :after
+              (lambda (&rest _)
+                (when buffer-file-name (ignore-errors (recenter)))))
+#+end_src
+
+A better keyboard-quit by an [[https://emacsredux.com/blog/2025/06/01/let-s-make-keyboard-quit-smarter/][EmacsRedux]] reader and you know why. If you dont:
 
 #+begin_quote
 'My emacs has no minibuffer-keyboard-quit , should I go shoot myself? emacs-version is ”30.1”' - someguy in the comments IhaveanoDoxpolicy
 #+end_quote
 
 Presenting:
-  "Smater version of the built-in `keyboard-quit'.
+"Smater version of the built-in `keyboard-quit'.
 
 The generic `keyboard-quit' does not do the expected thing when
 the minibuffer is open.  Whereas we want it to close the
-minibuffer, even without explicitly focusing it."
+minibuffer, even without explicitly focusing it.
 
 #+begin_src emacs-lisp
-(defun er-keyboard-quit ()
-  (interactive)
-  (if (active-minibuffer-window)
-      (if (minibufferp)
-          (minibuffer-keyboard-quit)
-        (abort-recursive-edit))
-    (keyboard-quit)))
-#+end_src
+  (define-advice keyboard-quit
+      (:around (quit) quit-current-context)
+    "Quit the current context.
 
-I just remap keyboard-quit to our improved version:
-
-#+begin_src emacs-lisp
-  (global-set-key [remap keyboard-quit] #'er-keyboard-quit)
+  When there is an active minibuffer and we are not inside it close
+  it.  When we are inside the minibuffer use the regular
+  `minibuffer-keyboard-quit' which quits any active region before
+  exiting.  When there is no minibuffer `keyboard-quit' unless we
+  are defining or executing a macro."
+    (if (active-minibuffer-window)
+        (if (minibufferp)
+            (minibuffer-keyboard-quit)
+          (abort-recursive-edit))
+      (unless (or defining-kbd-macro
+                  executing-kbd-macro)
+        (funcall-interactively quit))))
 #+end_src
 
 I want emacs backup files(confidence kills. backup or packup) but not in the same place as the original. Multiple copies and version control can also be handy.
 
 #+begin_src emacs-lisp
   (setopt backup-directory-alist `(("." . "~/.emacsbackups"))
-        make-backup-files t ; backup of a file the first time it is saved.
-        backup-by-copying t ; don't clobber symlinks
-        version-control t ; version numbers for backup files
-        delete-old-versions t
-        delete-by-moving-to-trash t
-        kept-new-versions 5 ; newest versions to keep when a new numbered backup is made (default: 2)
-        kept-old-versions 3 ; oldest versions to keep when a new numbered backup is made (default: 2)
-        auto-save-default t ; auto-save every buffer that visits a file
-        )
-#+end_src
-
-#+begin_src emacs-lisp
+  	make-backup-files t ; backup of a file the first time it is saved.
+  	backup-by-copying t ; don't clobber symlinks
+  	version-control t ; version numbers for backup files
+  	delete-old-versions t
+  	delete-by-moving-to-trash t
+  	kept-new-versions 5 ; newest versions to keep when a new numbered backup is made (default: 2)
+  	kept-old-versions 3 ; oldest versions to keep when a new numbered backup is made (default: 2)
+  	auto-save-default t ; auto-save every buffer that visits a file
+  	)
 #+end_src
 
 ** Init
@@ -126,9 +233,8 @@ I want emacs backup files(confidence kills. backup or packup) but not in the sam
 
 Load Modus-Vivendi cuz it is a cool theme.
 
-  (load-theme 'modus-vivendi-tritanopia t)
 #+begin_src emacs-lisp
-  (load-theme 'modus-vivendi-tritanopia t)
+  (load-theme 'modus-vivendi t)
 #+end_src
 
 I set emacs to use a nice default font. I like Iosevka. This way is apparently faster according to DOOM's maintainer cuz it loads less stuff. I have problems with the daemon while using set-frame-font so I just do this.
@@ -137,8 +243,8 @@ I also have a nice alpha background.
 
 #+begin_src emacs-lisp
   (add-to-list 'default-frame-alist '(font . "GohuFont uni11 NerdFont Propo 10" ))
-  (set-frame-parameter nil 'alpha-background 85)
-  (add-to-list 'default-frame-alist '(alpha-background . 85))
+  ;;(set-frame-parameter nil 'alpha-background 85)
+  ;;(add-to-list 'default-frame-alist '(alpha-background . 85))
 #+end_src
 
 *** Navigation and completion
@@ -165,8 +271,8 @@ Let's enable vim bindings cuz why not. Make sure to set `evil-want-keybinding' t
 
 #+begin_src emacs-lisp
   (use-package evil
-    :init
-    (setopt evil-want-keybinding nil)
+    :custom
+    (evil-want-keybinding nil)
     :config
     (evil-mode 1))
 #+end_src
@@ -176,8 +282,9 @@ This package contains preset vim bindings for everywhere else too.
 #+begin_src emacs-lisp
   (use-package evil-collection
     :after evil
+    :custom
+    (evil-want-integration t)
     :config
-    (setopt evil-want-integration t)
     (evil-collection-init))
 #+end_src
 
@@ -187,59 +294,58 @@ I have some setup and aesthetic tweaks to make org work(look;) nicer
 
 #+begin_src emacs-lisp
   (use-package org
-    :init
-    (setopt org-return-follows-link t ;; Follow the links
-  	  org-hide-emphasis-markers t ;; Hide the markers so you just see BOLD-TEXT and not *BOLD-TEXT*
-  	  org-agenda-files '("~/org") ;; Must do this so the agenda knows where to look for my files
-  	  org-log-done 'time) ;; When a TODO is set to a done state, record a timestamp
+    :custom
+    (org-return-follows-link t) ;; Follow the links
+    (org-hide-emphasis-markers t) ;; Hide the markers so you just see BOLD-TEXT and not *BOLD-TEXT*
+    (org-agenda-files '("~/org")) ;; Must do this so the agenda knows where to look for my files
+    (org-log-done 'time) ;; When a TODO is set to a done state, record a timestamp
+    (org-export-backends '(ascii html icalendar latex beamer md man odt texinfo)) ;; Org mode export options I want
+    (org-latex-compiler "lualatex") ;; Change the org-mode LaTeX export compiler to LuaLaTeX.
 
-    :hook (
-           (org-mode . org-indent-mode) ;; Make the indentation look nicer
-           (org-mode . visual-line-mode) ;; Wrap the lines in org mode so that things are easier to read
-  	 )
+    :hook 
+    (org-mode . org-indent-mode) ;; Make the indentation look nicer
+    (org-mode . visual-line-mode) ;; Wrap the lines in org mode so that things are easier to read
+    
 
     ;; Associate all org files with org mode
     :mode ("\\.org\\'" . org-mode)
 
-    :bind (
-  	 ;; Shortcuts for storing links, viewing the agenda, and starting a capture
-  	 ("\C-cl" . org-store-link)
-           ("\C-ca" . org-agenda)
-           ("\C-cc" . org-capture)
-    	 (:map org-mode-map
-  	       ;; Remap the change priority keys to use the UP or DOWN key
-                 ("C-c <up>" . org-priority-up)
-                 ("C-c <down>" . org-priority-down)
-  	       ;; When you want to change the level of an org item, use SMR
-                 ("C-c C-g C-r" . org-shiftmetaright)
-  	       )
-  	 )
+    :bind 
+    ;; Shortcuts for storing links, viewing the agenda, and starting a capture
+    ("\C-cl" . org-store-link)
+    ("\C-ca" . org-agenda)
+    ("\C-cc" . org-capture)
+    (:map org-mode-map
+  	;; Remap the change priority keys to use the UP or DOWN key
+          ("C-c <up>" . org-priority-up)
+          ("C-c <down>" . org-priority-down)
+  	;; When you want to change the level of an org item, use SMR
+          ("C-c C-g C-r" . org-shiftmetaright)
+  	)
 
-    :custom (org-export-backends '(ascii html icalendar latex beamer md man odt texinfo))
+    ;; AESTHETICS
+    :config
+    (when (display-graphic-p)
+      (let* ((variable-tuple
+              (cond ((x-list-fonts "Iosevka")         '(:font "Iosevka"))
+                    ((x-family-fonts "Iosevka")       '(:family "Iosevka"))
+                    (nil (warn "Cannot find a Iosevka Font. Install Iosevka."))))
+             (headline           `(:inherit default :weight bold)))
 
-  ;; AESTHETICS
-  :config
-  (when (display-graphic-p)
-    (let* ((variable-tuple
-            (cond ((x-list-fonts "Iosevka")         '(:font "Iosevka"))
-                  ((x-family-fonts "Iosevka")       '(:family "Iosevka"))
-                  (nil (warn "Cannot find a Iosevka Font. Install Iosevka."))))
-           (headline           `(:inherit default :weight bold)))
-
-      ;; Set different heights for different levels in org mode
-      (custom-theme-set-faces
-       'user
-       `(org-level-8 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
-       `(org-level-7 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
-       `(org-level-6 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
-       `(org-level-5 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
-       `(org-level-4 ((t (,@headline ,@variable-tuple :foreground, "#1DA3C0" :height 1.1))))
-       `(org-level-3 ((t (,@headline ,@variable-tuple :foreground, "#18857e" :height 1.25))))
-       `(org-level-2 ((t (,@headline ,@variable-tuple :foreground, "#c9372a" :height 1.5))))
-       `(org-level-1 ((t (,@headline ,@variable-tuple :foreground, "#920727" :height 1.75))))
-       `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
+        ;; Set different heights for different levels in org mode
+        (custom-theme-set-faces
+         'user
+         `(org-level-8 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
+         `(org-level-7 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
+         `(org-level-6 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
+         `(org-level-5 ((t (,@headline ,@variable-tuple :foreground, "#2e5d66"))))
+         `(org-level-4 ((t (,@headline ,@variable-tuple :foreground, "#1DA3C0" :height 1.1))))
+         `(org-level-3 ((t (,@headline ,@variable-tuple :foreground, "#18857e" :height 1.25))))
+         `(org-level-2 ((t (,@headline ,@variable-tuple :foreground, "#c9372a" :height 1.5))))
+         `(org-level-1 ((t (,@headline ,@variable-tuple :foreground, "#920727" :height 1.75))))
+         `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
+      )
     )
-  )
 #+end_src
 
 *** Org Roam
@@ -250,18 +356,57 @@ I have some setup and aesthetic tweaks to make org work(look;) nicer
 *** Magit : It's Magit bro
 
 #+begin_src emacs-lisp
-  (use-package magit)
+  (use-package magit
+    )
 #+end_src
 
 *** LaTeX
 
-Change the org-mode LaTeX export compiler to LuaLaTeX.
+AUCTeX for some heavy lifting
 
 #+begin_src emacs-lisp
-  (setopt org-latex-compiler "lualatex")
+  (use-package tex-site
+    :ensure auctex)
 #+end_src
 
 *** EMAIL
 
 #+begin_src emacs-lisp
+  (use-package gnus)
+#+end_src
+
+*** Subtitle package configuration
+#+begin_src emacs-lisp
+  (use-package subed
+  	:hook 
+  	;; Remember cursor position between sessions
+  	(subed-mode . save-place-local-mode)
+  	;; Break lines automatically while typing
+  	(subed-mode . turn-on-auto-fill)
+  	;; Break lines at 40 characters
+  	(subed-mode . (lambda () (setq-local fill-column 40)))
+  	;; Some reasonable defaults
+  	(subed-mode . subed-enable-pause-while-typing)
+  	;; As the player moves, update the point to show the current subtitle
+  	(subed-mode . subed-enable-sync-point-to-player)
+  	;; As your point moves in Emacs, update the player to start at the current subtitle
+  	(subed-mode . subed-enable-sync-player-to-point)
+  	;; Replay subtitles as you adjust their start or stop time with M-[, M-], M-{, or M-}
+  	(subed-mode . subed-enable-replay-adjusted-subtitle)
+  	;; Loop over subtitles
+  	(subed-mode . subed-enable-loop-over-current-subtitle)
+  	;; Show characters per second
+  	(subed-mode . subed-enable-show-cps)
+  	)
+#+end_src
+
+*** Scanner and tesseract ocr configuration
+
+#+begin_src emacs-lisp
+  ;; (use-package scanner
+  ;;   :init
+  ;;   (setopt scanner-use-unpaper t)
+
+  ;;   :bind-keymap ("s-s" . scanner-map)
+  ;;   )
 #+end_src
